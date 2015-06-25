@@ -1,0 +1,539 @@
+
+				
+				
+				//Kas
+				//1010000
+				$code = "1010000";
+				$code_level1 = substr($code,0,3);
+				for($branch=0; $branch <=5; $branch++){
+					$account_1010000_debet[$branch]  = $this->jurnal_model->sum_account_parent_debet_by_date($code_level1,$date_start,$date_end,$branch);
+					$account_1010000_credit[$branch] = $this->jurnal_model->sum_account_parent_credit_by_date($code_level1,$date_start,$date_end,$branch);
+					$account_1010000[$branch] = $account_1010000_debet[$branch] - $account_1010000_credit[$branch] ;
+					$account_1010000_konsolidasi += $account_1010000[$branch];
+					$account_kas[$branch] += $account_1010000[$branch];				
+					$account_aset_lancar[$branch] += $account_1010000[$branch];	
+				}
+				//1020000 
+				$code = "1020000";
+				$code_level1 = substr($code,0,3);
+				for($branch=0; $branch <=5; $branch++){
+					$account_1020000_debet[$branch]  = $this->jurnal_model->sum_account_parent_debet_by_date($code_level1,$date_start,$date_end,$branch);
+					$account_1020000_credit[$branch] = $this->jurnal_model->sum_account_parent_credit_by_date($code_level1,$date_start,$date_end,$branch);
+					$account_1020000[$branch] = $account_1020000_debet[$branch] - $account_1020000_credit[$branch];
+					$account_1020000_konsolidasi += $account_1020000[$branch];
+					$account_kas[$branch] += $account_1020000[$branch];		
+					$account_aset_lancar[$branch] += $account_1020000[$branch];
+				}
+				//Total Kas
+				$account_kas_konsolidasi = $account_1010000_konsolidasi + $account_1020000_konsolidasi;
+				
+				$print .= '	<tr><td align="left" >&nbsp;&nbsp;&nbsp;&nbsp;Kas Teller</b></td>
+								<td align="right" >'.($account_kas_konsolidasi < 0 ? "(".number_format(abs($account_kas_konsolidasi)).")" : number_format($account_kas_konsolidasi)).'</td>
+								<td align="right" >'.($account_kas[0] < 0 ? "(".number_format(abs($account_kas[0])).")" : number_format($account_kas[0])).'</td>
+								<td align="right" >'.($account_kas[1] < 0 ? "(".number_format(abs($account_kas[1])).")" : number_format($account_kas[1])).'</td>
+								<td align="right" >'.($account_kas[4] < 0 ? "(".number_format(abs($account_kas[4])).")" : number_format($account_kas[4])).'</td>
+								<td align="right" >'.($account_kas[3] < 0 ? "(".number_format(abs($account_kas[3])).")" : number_format($account_kas[3])).'</td>
+								<td align="right" >'.($account_kas[2] < 0 ? "(".number_format(abs($account_kas[2])).")" : number_format($account_kas[2])).'</td>
+								<td align="right" >'.($account_kas[5] < 0 ? "(".number_format(abs($account_kas[5])).")" : number_format($account_kas[5])).'</td>
+							</tr>';	
+				$print .= '	<tr><td align="left" >&nbsp;&nbsp;&nbsp;&nbsp;Bank Tabungan</b></td>
+								<td align="right" >'.($account_kas_konsolidasi < 0 ? "(".number_format(abs($account_kas_konsolidasi)).")" : number_format($account_kas_konsolidasi)).'</td>
+								<td align="right" >'.($account_kas[0] < 0 ? "(".number_format(abs($account_kas[0])).")" : number_format($account_kas[0])).'</td>
+								<td align="right" >'.($account_kas[1] < 0 ? "(".number_format(abs($account_kas[1])).")" : number_format($account_kas[1])).'</td>
+								<td align="right" >'.($account_kas[4] < 0 ? "(".number_format(abs($account_kas[4])).")" : number_format($account_kas[4])).'</td>
+								<td align="right" >'.($account_kas[3] < 0 ? "(".number_format(abs($account_kas[3])).")" : number_format($account_kas[3])).'</td>
+								<td align="right" >'.($account_kas[2] < 0 ? "(".number_format(abs($account_kas[2])).")" : number_format($account_kas[2])).'</td>
+								<td align="right" >'.($account_kas[5] < 0 ? "(".number_format(abs($account_kas[5])).")" : number_format($account_kas[5])).'</td>
+							</tr>';		
+				$print .= '	<tr><td align="left" >&nbsp;&nbsp;&nbsp;&nbsp;Bank Deposito</b></td>
+								<td align="right" >'.($account_kas_konsolidasi < 0 ? "(".number_format(abs($account_kas_konsolidasi)).")" : number_format($account_kas_konsolidasi)).'</td>
+								<td align="right" >'.($account_kas[0] < 0 ? "(".number_format(abs($account_kas[0])).")" : number_format($account_kas[0])).'</td>
+								<td align="right" >'.($account_kas[1] < 0 ? "(".number_format(abs($account_kas[1])).")" : number_format($account_kas[1])).'</td>
+								<td align="right" >'.($account_kas[4] < 0 ? "(".number_format(abs($account_kas[4])).")" : number_format($account_kas[4])).'</td>
+								<td align="right" >'.($account_kas[3] < 0 ? "(".number_format(abs($account_kas[3])).")" : number_format($account_kas[3])).'</td>
+								<td align="right" >'.($account_kas[2] < 0 ? "(".number_format(abs($account_kas[2])).")" : number_format($account_kas[2])).'</td>
+								<td align="right" >'.($account_kas[5] < 0 ? "(".number_format(abs($account_kas[5])).")" : number_format($account_kas[5])).'</td>
+							</tr>';									
+				//Piutang MBA 1030102
+				$code = "1030102";
+				for($branch=0; $branch <=5; $branch++){
+					$account_1030102_debet[$branch]  = $this->jurnal_model->sum_account_debet_by_date($code,$date_start,$date_end,$branch);
+					$account_1030102_credit[$branch] = $this->jurnal_model->sum_account_credit_by_date($code,$date_start,$date_end,$branch);
+					$account_1030102[$branch] = $account_1030102_debet[$branch] - $account_1030102_credit[$branch];
+					$account_1030102_konsolidasi += $account_1030102[$branch];
+					$account_piutang_pembiayaan[$branch] += $account_1030102[$branch];			
+					$account_aset_lancar[$branch] += $account_1030102[$branch];
+				}
+				//Piutang IJA 1030103
+				$code = "1030103";
+				for($branch=0; $branch <=5; $branch++){
+					$account_1030103_debet[$branch]  = $this->jurnal_model->sum_account_debet_by_date($code,$date_start,$date_end,$branch);
+					$account_1030103_credit[$branch] = $this->jurnal_model->sum_account_credit_by_date($code,$date_start,$date_end,$branch);
+					$account_1030103[$branch] = $account_1030103_debet[$branch] - $account_1030103_credit[$branch];
+					$account_1030103_konsolidasi += $account_1030103[$branch];
+					$account_piutang_pembiayaan[$branch] += $account_1030103[$branch];				
+					$account_aset_lancar[$branch] += $account_1030103[$branch];
+				}
+				//Piutang QH 1030104
+				$code = "1030104";
+				for($branch=0; $branch <=5; $branch++){
+					$account_1030104_debet[$branch]  = $this->jurnal_model->sum_account_debet_by_date($code,$date_start,$date_end,$branch);
+					$account_1030104_credit[$branch] = $this->jurnal_model->sum_account_credit_by_date($code,$date_start,$date_end,$branch);
+					$account_1030104[$branch] = $account_1030104_debet[$branch] - $account_1030104_credit[$branch];
+					$account_1030104_konsolidasi += $account_1030104[$branch];
+					$account_piutang_pembiayaan[$branch] += $account_1030104[$branch];					
+					$account_aset_lancar[$branch] += $account_1030104[$branch];
+				}
+				//Piutang QH 1030504
+				$code = "1030504";
+				for($branch=0; $branch <=5; $branch++){
+					$account_1030504_debet[$branch]  = $this->jurnal_model->sum_account_debet_by_date($code,$date_start,$date_end,$branch);
+					$account_1030504_credit[$branch] = $this->jurnal_model->sum_account_credit_by_date($code,$date_start,$date_end,$branch);
+					$account_1030104[$branch] = $account_1030504_debet[$branch] - $account_1030504_credit[$branch];
+					$account_1030104_konsolidasi += $account_1030504[$branch];
+					$account_piutang_pembiayaan[$branch] += $account_1030504[$branch];					
+					$account_aset_lancar[$branch] += $account_1030104[$branch];
+				}
+				
+				//Piutang Cabang 1030400
+				$code = "1030400";
+				$code_level2 = substr($code,0,5);
+				for($branch=0; $branch <=5; $branch++){
+					$account_1030400_debet[$branch]  = $this->jurnal_model->sum_account_parent_debet_by_date($code_level2,$date_start,$date_end,$branch);
+					$account_1030400_credit[$branch] = $this->jurnal_model->sum_account_parent_credit_by_date($code_level2,$date_start,$date_end,$branch);
+					$account_1030400[$branch] = $account_1030400_debet[$branch] - $account_1030400_credit[$branch];
+					$account_1030400_konsolidasi += $account_1030400[$branch];
+					$account_piutang_pembiayaan[$branch] += $account_1030400[$branch];
+					$account_aset_lancar[$branch] += $account_1030400[$branch];
+				}
+				
+				$account_piutang_pembiayaan_konsolidasi = $account_1030102_konsolidasi  + $account_1030103_konsolidasi + + $account_1030104_konsolidasi + $account_1030400_konsolidasi;
+				
+				$print .= '	<tr><td align="left" >&nbsp;&nbsp;&nbsp;&nbsp;Piutang Pembiayaan</b></td>
+								<td align="right" >'.($account_piutang_pembiayaan_konsolidasi < 0 ? "(".number_format(abs($account_piutang_pembiayaan_konsolidasi)).")" : number_format($account_piutang_pembiayaan_konsolidasi)).'</td>
+								<td align="right" >'.($account_piutang_pembiayaan[0] < 0 ? "(".number_format(abs($account_piutang_pembiayaan[0])).")" : number_format($account_piutang_pembiayaan[0])).'</td>
+								<td align="right" >'.($account_piutang_pembiayaan[1] < 0 ? "(".number_format(abs($account_piutang_pembiayaan[1])).")" : number_format($account_piutang_pembiayaan[1])).'</td>
+								<td align="right" >'.($account_piutang_pembiayaan[4] < 0 ? "(".number_format(abs($account_piutang_pembiayaan[4])).")" : number_format($account_piutang_pembiayaan[4])).'</td>
+								<td align="right" >'.($account_piutang_pembiayaan[3] < 0 ? "(".number_format(abs($account_piutang_pembiayaan[3])).")" : number_format($account_piutang_pembiayaan[3])).'</td>
+								<td align="right" >'.($account_piutang_pembiayaan[2] < 0 ? "(".number_format(abs($account_piutang_pembiayaan[2])).")" : number_format($account_piutang_pembiayaan[2])).'</td>
+								<td align="right" >'.($account_piutang_pembiayaan[5] < 0 ? "(".number_format(abs($account_piutang_pembiayaan[5])).")" : number_format($account_piutang_pembiayaan[5])).'</td>
+							</tr>';
+				/*
+				$print .= '	<tr><td align="left" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Murabahah</td>
+								<td align="right" >'.($account_1030102_konsolidasi < 0 ? "(".number_format(abs($account_1030102_konsolidasi)).")" : number_format($account_1030102_konsolidasi)).'</td>
+								<td align="right" >'.($account_1030102[0] < 0 ? "(".number_format(abs($account_1030102[0])).")" : number_format($account_1030102[0])).'</td>
+								<td align="right" >'.($account_1030102[1] < 0 ? "(".number_format(abs($account_1030102[1])).")" : number_format($account_1030102[1])).'</td>
+								<td align="right" >'.($account_1030102[4] < 0 ? "(".number_format(abs($account_1030102[4])).")" : number_format($account_1030102[4])).'</td>
+								<td align="right" >'.($account_1030102[3] < 0 ? "(".number_format(abs($account_1030102[3])).")" : number_format($account_1030102[3])).'</td>
+								<td align="right" >'.($account_1030102[2] < 0 ? "(".number_format(abs($account_1030102[2])).")" : number_format($account_1030102[2])).'</td>
+								<td align="right" >'.($account_1030102[5] < 0 ? "(".number_format(abs($account_1030102[5])).")" : number_format($account_1030102[5])).'</td>
+							</tr>';
+				$print .= '	<tr><td align="left" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ijarah</td>
+								<td align="right" >'.($account_1030103_konsolidasi < 0 ? "(".number_format(abs($account_1030103_konsolidasi)).")" : number_format($account_1030103_konsolidasi)).'</td>
+								<td align="right" >'.($account_1030103[0] < 0 ? "(".number_format(abs($account_1030103[0])).")" : number_format($account_1030103[0])).'</td>
+								<td align="right" >'.($account_1030103[1] < 0 ? "(".number_format(abs($account_1030103[1])).")" : number_format($account_1030103[1])).'</td>
+								<td align="right" >'.($account_1030103[4] < 0 ? "(".number_format(abs($account_1030103[4])).")" : number_format($account_1030103[4])).'</td>
+								<td align="right" >'.($account_1030103[3] < 0 ? "(".number_format(abs($account_1030103[3])).")" : number_format($account_1030103[3])).'</td>
+								<td align="right" >'.($account_1030103[2] < 0 ? "(".number_format(abs($account_1030103[2])).")" : number_format($account_1030103[2])).'</td>
+								<td align="right" >'.($account_1030103[5] < 0 ? "(".number_format(abs($account_1030102[5])).")" : number_format($account_1030102[5])).'</td>
+							</tr>';
+				$print .= '	<tr><td align="left" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Qadrul Hasan</td>
+								<td align="right" >'.($account_1030104_konsolidasi < 0 ? "(".number_format(abs($account_1030104_konsolidasi)).")" : number_format($account_1030104_konsolidasi)).'</td>
+								<td align="right" >'.($account_1030104[0] < 0 ? "(".number_format(abs($account_1030104[0])).")" : number_format($account_1030104[0])).'</td>
+								<td align="right" >'.($account_1030104[1] < 0 ? "(".number_format(abs($account_1030104[1])).")" : number_format($account_1030104[1])).'</td>
+								<td align="right" >'.($account_1030104[4] < 0 ? "(".number_format(abs($account_1030104[4])).")" : number_format($account_1030104[4])).'</td>
+								<td align="right" >'.($account_1030104[3] < 0 ? "(".number_format(abs($account_1030104[3])).")" : number_format($account_1030104[3])).'</td>
+								<td align="right" >'.($account_1030104[2] < 0 ? "(".number_format(abs($account_1030104[2])).")" : number_format($account_1030104[2])).'</td>
+								<td align="right" >'.($account_1030104[5] < 0 ? "(".number_format(abs($account_1030104[5])).")" : number_format($account_1030104[5])).'</td>
+							</tr>';
+				
+				$print .= '	<tr><td align="left" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cabang</td>
+								<td align="right" >'.($account_1030400_konsolidasi < 0 ? "(".number_format(abs($account_1030400_konsolidasi)).")" : number_format($account_1030400_konsolidasi)).'</td>
+								<td align="right" >'.($account_1030400[0] < 0 ? "(".number_format(abs($account_1030400[0])).")" : number_format($account_1030400[0])).'</td>
+								<td align="right" >'.($account_1030400[1] < 0 ? "(".number_format(abs($account_1030400[1])).")" : number_format($account_1030400[1])).'</td>
+								<td align="right" >'.($account_1030400[4] < 0 ? "(".number_format(abs($account_1030400[4])).")" : number_format($account_1030400[4])).'</td>
+								<td align="right" >'.($account_1030400[3] < 0 ? "(".number_format(abs($account_1030400[3])).")" : number_format($account_1030400[3])).'</td>
+								<td align="right" >'.($account_1030400[2] < 0 ? "(".number_format(abs($account_1030400[2])).")" : number_format($account_1030400[2])).'</td>
+								<td align="right" >'.($account_1030400[5] < 0 ? "(".number_format(abs($account_1030400[5])).")" : number_format($account_1030400[5])).'</td>
+							</tr>';
+				*/
+				
+				$print .= '	<tr><td align="left" >&nbsp;&nbsp;&nbsp;&nbsp;Pinjaman Karyawan</b></td>
+								<td align="right" >'.($account_piutang_pembiayaan_konsolidasi < 0 ? "(".number_format(abs($account_piutang_pembiayaan_konsolidasi)).")" : number_format($account_piutang_pembiayaan_konsolidasi)).'</td>
+								<td align="right" >'.($account_piutang_pembiayaan[0] < 0 ? "(".number_format(abs($account_piutang_pembiayaan[0])).")" : number_format($account_piutang_pembiayaan[0])).'</td>
+								<td align="right" >'.($account_piutang_pembiayaan[1] < 0 ? "(".number_format(abs($account_piutang_pembiayaan[1])).")" : number_format($account_piutang_pembiayaan[1])).'</td>
+								<td align="right" >'.($account_piutang_pembiayaan[4] < 0 ? "(".number_format(abs($account_piutang_pembiayaan[4])).")" : number_format($account_piutang_pembiayaan[4])).'</td>
+								<td align="right" >'.($account_piutang_pembiayaan[3] < 0 ? "(".number_format(abs($account_piutang_pembiayaan[3])).")" : number_format($account_piutang_pembiayaan[3])).'</td>
+								<td align="right" >'.($account_piutang_pembiayaan[2] < 0 ? "(".number_format(abs($account_piutang_pembiayaan[2])).")" : number_format($account_piutang_pembiayaan[2])).'</td>
+								<td align="right" >'.($account_piutang_pembiayaan[5] < 0 ? "(".number_format(abs($account_piutang_pembiayaan[5])).")" : number_format($account_piutang_pembiayaan[5])).'</td>
+							</tr>';
+				
+				
+				//Beban dibayar dimuka 1050000
+				$code = "1050000";
+				$code_level1 = substr($code,0,3);
+				for($branch=0; $branch <=5; $branch++){
+					$account_1050000_debet[$branch]  = $this->jurnal_model->sum_account_parent_debet_by_date($code_level1,$date_start,$date_end,$branch);
+					$account_1050000_credit[$branch] = $this->jurnal_model->sum_account_parent_credit_by_date($code_level1,$date_start,$date_end,$branch);
+					$account_1050000[$branch] = $account_1050000_debet[$branch] - $account_1050000_credit[$branch];
+					$account_1050000_konsolidasi += $account_1050000[$branch];
+					$account_aset_lancar[$branch] += $account_1050000[$branch];
+				}
+				//Persediaan Barang Cetakan 1060000
+				$code = "1060000";
+				$code_level1 = substr($code,0,3);
+				for($branch=0; $branch <=5; $branch++){
+					$account_1060000_debet[$branch]  = $this->jurnal_model->sum_account_parent_debet_by_date($code_level1,$date_start,$date_end,$branch);
+					$account_1060000_credit[$branch] = $this->jurnal_model->sum_account_parent_credit_by_date($code_level1,$date_start,$date_end,$branch);
+					$account_1060000[$branch] = $account_1060000_debet[$branch] - $account_1060000_credit[$branch];
+					$account_1060000_konsolidasi += $account_1060000[$branch];
+					$account_aset_lancar[$branch] += $account_1060000[$branch];
+				}
+				$account_aset_lancar_konsolidasi = $account_kas_konsolidasi + $account_piutang_pembiayaan_konsolidasi + $account_1060000_konsolidasi+$account_1050000_konsolidasi;
+				$print .= '	<tr><td align="left" >&nbsp;&nbsp;&nbsp;&nbsp;Beban dibayar dimuka</td>
+								<td align="right" >'.($account_1050000_konsolidasi < 0 ? "(".number_format(abs($account_1050000_konsolidasi)).")" : number_format($account_1050000_konsolidasi)).'</td>
+								<td align="right" >'.($account_1050000[0] < 0 ? "(".number_format(abs($account_1050000[0])).")" : number_format($account_1050000[0])).'</td>
+								<td align="right" >'.($account_1050000[1] < 0 ? "(".number_format(abs($account_1050000[1])).")" : number_format($account_1050000[1])).'</td>
+								<td align="right" >'.($account_1050000[4] < 0 ? "(".number_format(abs($account_1050000[4])).")" : number_format($account_1050000[4])).'</td>
+								<td align="right" >'.($account_1050000[3] < 0 ? "(".number_format(abs($account_1050000[3])).")" : number_format($account_1050000[3])).'</td>
+								<td align="right" >'.($account_1050000[2] < 0 ? "(".number_format(abs($account_1050000[2])).")" : number_format($account_1050000[2])).'</td>
+								<td align="right" >'.($account_1050000[5] < 0 ? "(".number_format(abs($account_1050000[5])).")" : number_format($account_1050000[5])).'</td>
+							</tr>';
+				$print .= '	<tr><td align="left" >&nbsp;&nbsp;&nbsp;&nbsp;Persediaan Barang Cetakan</td>
+								<td align="right" class="border_btm">'.($account_1060000_konsolidasi < 0 ? "(".number_format(abs($account_1060000_konsolidasi)).")" : number_format($account_1060000_konsolidasi)).'</td>
+								<td align="right" class="border_btm">'.($account_1060000[0] < 0 ? "(".number_format(abs($account_1060000[0])).")" : number_format($account_1060000[0])).'</td>
+								<td align="right" class="border_btm">'.($account_1060000[1] < 0 ? "(".number_format(abs($account_1060000[1])).")" : number_format($account_1060000[1])).'</td>
+								<td align="right" class="border_btm">'.($account_1060000[4] < 0 ? "(".number_format(abs($account_1060000[4])).")" : number_format($account_1060000[4])).'</td>
+								<td align="right" class="border_btm">'.($account_1060000[3] < 0 ? "(".number_format(abs($account_1060000[3])).")" : number_format($account_1060000[3])).'</td>
+								<td align="right" class="border_btm">'.($account_1060000[2] < 0 ? "(".number_format(abs($account_1060000[2])).")" : number_format($account_1060000[2])).'</td>
+								<td align="right" class="border_btm">'.($account_1060000[5] < 0 ? "(".number_format(abs($account_1060000[5])).")" : number_format($account_1060000[5])).'</td>
+							</tr>';
+				
+				$print .= '	<tr><td align="left" >Total Aset Lancar</td>
+								<td align="right" class="border_btm">'.($account_aset_lancar_konsolidasi < 0 ? "(".number_format(abs($account_aset_lancar_konsolidasi)).")" : number_format($account_aset_lancar_konsolidasi)).'</td>
+								<td align="right" class="border_btm">'.($account_aset_lancar[0] < 0 ? "(".number_format(abs($account_aset_lancar[0])).")" : number_format($account_aset_lancar[0])).'</td>
+								<td align="right" class="border_btm">'.($account_aset_lancar[1] < 0 ? "(".number_format(abs($account_aset_lancar[1])).")" : number_format($account_aset_lancar[1])).'</td>
+								<td align="right" class="border_btm">'.($account_aset_lancar[4] < 0 ? "(".number_format(abs($account_aset_lancar[4])).")" : number_format($account_aset_lancar[4])).'</td>
+								<td align="right" class="border_btm">'.($account_aset_lancar[3] < 0 ? "(".number_format(abs($account_aset_lancar[3])).")" : number_format($account_aset_lancar[3])).'</td>
+								<td align="right" class="border_btm">'.($account_aset_lancar[2] < 0 ? "(".number_format(abs($account_aset_lancar[2])).")" : number_format($account_aset_lancar[2])).'</td>
+								<td align="right" class="border_btm">'.($account_aset_lancar[5] < 0 ? "(".number_format(abs($account_aset_lancar[5])).")" : number_format($account_aset_lancar[5])).'</td>
+							</tr>';
+							
+				//ASET TIDAK LANCAR
+				$print .= '	<tr><td align="left" colspan="8" ></td></tr>';
+				$print .= '	<tr><td align="left" ><b>ASET TIDAK LANCAR</b></td>	<td colspan="7" ></td></tr>';
+				
+				/*
+				//Aset Tetap setelah dikurangi = 1080301 + 1080302				
+				$code = "1080301";
+				for($branch=0; $branch <=5; $branch++){
+					$account_1080301_debet[$branch]  = $this->jurnal_model->sum_account_debet_by_date($code,$date_start,$date_end,$branch);
+					$account_1080301_credit[$branch] = $this->jurnal_model->sum_account_credit_by_date($code,$date_start,$date_end,$branch);
+					$account_1080301[$branch] = $account_1080301_debet[$branch] - $account_1080301_credit[$branch];
+					$account_1080301_konsolidasi += $account_1080301[$branch];
+					$account_aset_tetap[$branch] += $account_1080301[$branch];					
+					$account_aset_tidak_lancar[$branch] += $account_1080301[$branch];
+				}
+				$code = "1080302";
+				for($branch=0; $branch <=5; $branch++){
+					$account_1080302_debet[$branch]  = $this->jurnal_model->sum_account_debet_by_date($code,$date_start,$date_end,$branch);
+					$account_1080302_credit[$branch] = $this->jurnal_model->sum_account_credit_by_date($code,$date_start,$date_end,$branch);
+					$account_1080302[$branch] = $account_1080302_debet[$branch] - $account_1080302_credit[$branch];
+					$account_1080302_konsolidasi += $account_1080302[$branch];
+					$account_aset_tetap[$branch] += $account_1080302[$branch];					
+					$account_aset_tidak_lancar[$branch] += $account_1080302[$branch];
+				}
+				$account_aset_tetap_konsolidasi = $account_1080301_konsolidasi + $account_1080302_konsolidasi;
+				*/
+				//Aset Lain	1090000
+				$code = "1090000";
+				$code_level1 = substr($code,0,3);
+				for($branch=0; $branch <=5; $branch++){
+					$account_1090000_debet[$branch]  = $this->jurnal_model->sum_account_parent_debet_by_date($code_level1,$date_start,$date_end,$branch);
+					$account_1090000_credit[$branch] = $this->jurnal_model->sum_account_parent_credit_by_date($code_level1,$date_start,$date_end,$branch);
+					$account_1090000[$branch] = $account_1090000_debet[$branch] - $account_1090000_credit[$branch];
+					$account_aset_lain_konsolidasi += $account_1090000[$branch];
+					$account_aset_tidak_lancar[$branch] += $account_1090000[$branch];
+				}
+				
+				$account_aset_tidak_lancar_konsolidasi = $account_aset_tetap_konsolidasi + $account_aset_lain_konsolidasi;
+				/*
+				$print .= '	<tr><td align="left" >&nbsp;&nbsp;&nbsp;&nbsp;Aset Tetap - setelah dikurangi</td>
+								<td align="right" >'.($account_aset_tetap_konsolidasi < 0 ? "(".number_format(abs($account_aset_tetap_konsolidasi)).")" : number_format($account_aset_tetap_konsolidasi)).'</td>
+								<td align="right" >'.($account_aset_tetap[0] < 0 ? "(".number_format(abs($account_aset_tetap[0])).")" : number_format($account_aset_tetap[0])).'</td>
+								<td align="right" >'.($account_aset_tetap[1] < 0 ? "(".number_format(abs($account_aset_tetap[1])).")" : number_format($account_aset_tetap[1])).'</td>
+								<td align="right" >'.($account_aset_tetap[4] < 0 ? "(".number_format(abs($account_aset_tetap[4])).")" : number_format($account_aset_tetap[4])).'</td>
+								<td align="right" >'.($account_aset_tetap[3] < 0 ? "(".number_format(abs($account_aset_tetap[3])).")" : number_format($account_aset_tetap[3])).'</td>
+								<td align="right" >'.($account_aset_tetap[2] < 0 ? "(".number_format(abs($account_aset_tetap[2])).")" : number_format($account_aset_tetap[2])).'</td>
+								<td align="right" >'.($account_aset_tetap[5] < 0 ? "(".number_format(abs($account_aset_tetap[5])).")" : number_format($account_aset_tetap[5])).'</td>
+							</tr>';
+				*/
+				$print .= '	<tr><td align="left" >&nbsp;&nbsp;&nbsp;&nbsp;Lain - Lain</td>
+								<td align="right" class="border_btm">'.($account_aset_lain_konsolidasi < 0 ? "(".number_format(abs($account_aset_lain_konsolidasi)).")" : number_format($account_aset_lain_konsolidasi)).'</td>
+								<td align="right" class="border_btm">'.($account_1090000[0] < 0 ? "(".number_format(abs($account_1090000[0])).")" : number_format($account_1090000[0])).'</td>
+								<td align="right" class="border_btm">'.($account_1090000[1] < 0 ? "(".number_format(abs($account_1090000[1])).")" : number_format($account_1090000[1])).'</td>
+								<td align="right" class="border_btm">'.($account_1090000[4] < 0 ? "(".number_format(abs($account_1090000[4])).")" : number_format($account_1090000[4])).'</td>
+								<td align="right" class="border_btm">'.($account_1090000[3] < 0 ? "(".number_format(abs($account_1090000[3])).")" : number_format($account_1090000[3])).'</td>
+								<td align="right" class="border_btm">'.($account_1090000[2] < 0 ? "(".number_format(abs($account_1090000[2])).")" : number_format($account_1090000[2])).'</td>
+								<td align="right" class="border_btm">'.($account_1090000[5] < 0 ? "(".number_format(abs($account_1090000[5])).")" : number_format($account_1090000[5])).'</td>
+							</tr>';
+				/*
+				$print .= '	<tr><td align="left" >Jumlah Aset Tidak Lancar</td>
+								<td align="right" class="border_btm">'.($account_aset_tidak_lancar_konsolidasi < 0 ? "(".number_format(abs($account_aset_tidak_lancar_konsolidasi)).")" : number_format($account_aset_tidak_lancar_konsolidasi)).'</td>
+								<td align="right" class="border_btm">'.($account_aset_tidak_lancar[0] < 0 ? "(".number_format(abs($account_aset_tidak_lancar[0])).")" : number_format($account_aset_tidak_lancar[0])).'</td>
+								<td align="right" class="border_btm">'.($account_aset_tidak_lancar[1] < 0 ? "(".number_format(abs($account_aset_tidak_lancar[1])).")" : number_format($account_aset_tidak_lancar[1])).'</td>
+								<td align="right" class="border_btm">'.($account_aset_tidak_lancar[4] < 0 ? "(".number_format(abs($account_aset_tidak_lancar[4])).")" : number_format($account_aset_tidak_lancar[4])).'</td>
+								<td align="right" class="border_btm">'.($account_aset_tidak_lancar[3] < 0 ? "(".number_format(abs($account_aset_tidak_lancar[3])).")" : number_format($account_aset_tidak_lancar[3])).'</td>
+								<td align="right" class="border_btm">'.($account_aset_tidak_lancar[2] < 0 ? "(".number_format(abs($account_aset_tidak_lancar[2])).")" : number_format($account_aset_tidak_lancar[2])).'</td>
+								<td align="right" class="border_btm">'.($account_aset_tidak_lancar[5] < 0 ? "(".number_format(abs($account_aset_tidak_lancar[5])).")" : number_format($account_aset_tidak_lancar[5])).'</td>
+							</tr>';
+				*/
+				
+				//ASET TETAP
+				$print .= '	<tr><td align="left" colspan="8" ></td></tr>';
+				$print .= '	<tr><td align="left" ><b>ASET TETAP</b></td>	<td colspan="7" ></td></tr>';
+				
+				$print .= '	<tr><td align="left" >&nbsp;&nbsp;&nbsp;&nbsp;Tanah</td>
+								<td align="right" class="">'.($account_aset_lain_konsolidasi < 0 ? "(".number_format(abs($account_aset_lain_konsolidasi)).")" : number_format($account_aset_lain_konsolidasi)).'</td>
+								<td align="right" class="">'.($account_1090000[0] < 0 ? "(".number_format(abs($account_1090000[0])).")" : number_format($account_1090000[0])).'</td>
+								<td align="right" class="">'.($account_1090000[1] < 0 ? "(".number_format(abs($account_1090000[1])).")" : number_format($account_1090000[1])).'</td>
+								<td align="right" class="">'.($account_1090000[4] < 0 ? "(".number_format(abs($account_1090000[4])).")" : number_format($account_1090000[4])).'</td>
+								<td align="right" class="">'.($account_1090000[3] < 0 ? "(".number_format(abs($account_1090000[3])).")" : number_format($account_1090000[3])).'</td>
+								<td align="right" class="">'.($account_1090000[2] < 0 ? "(".number_format(abs($account_1090000[2])).")" : number_format($account_1090000[2])).'</td>
+								<td align="right" class="">'.($account_1090000[5] < 0 ? "(".number_format(abs($account_1090000[5])).")" : number_format($account_1090000[5])).'</td>
+							</tr>';
+				$print .= '	<tr><td align="left" >&nbsp;&nbsp;&nbsp;&nbsp;Bangunan</td>
+								<td align="right" class="">'.($account_aset_lain_konsolidasi < 0 ? "(".number_format(abs($account_aset_lain_konsolidasi)).")" : number_format($account_aset_lain_konsolidasi)).'</td>
+								<td align="right" class="">'.($account_1090000[0] < 0 ? "(".number_format(abs($account_1090000[0])).")" : number_format($account_1090000[0])).'</td>
+								<td align="right" class="">'.($account_1090000[1] < 0 ? "(".number_format(abs($account_1090000[1])).")" : number_format($account_1090000[1])).'</td>
+								<td align="right" class="">'.($account_1090000[4] < 0 ? "(".number_format(abs($account_1090000[4])).")" : number_format($account_1090000[4])).'</td>
+								<td align="right" class="">'.($account_1090000[3] < 0 ? "(".number_format(abs($account_1090000[3])).")" : number_format($account_1090000[3])).'</td>
+								<td align="right" class="">'.($account_1090000[2] < 0 ? "(".number_format(abs($account_1090000[2])).")" : number_format($account_1090000[2])).'</td>
+								<td align="right" class="">'.($account_1090000[5] < 0 ? "(".number_format(abs($account_1090000[5])).")" : number_format($account_1090000[5])).'</td>
+							</tr>';
+				$print .= '	<tr><td align="left" >&nbsp;&nbsp;&nbsp;&nbsp;Kendaraan</td>
+								<td align="right" class="">'.($account_aset_lain_konsolidasi < 0 ? "(".number_format(abs($account_aset_lain_konsolidasi)).")" : number_format($account_aset_lain_konsolidasi)).'</td>
+								<td align="right" class="">'.($account_1090000[0] < 0 ? "(".number_format(abs($account_1090000[0])).")" : number_format($account_1090000[0])).'</td>
+								<td align="right" class="">'.($account_1090000[1] < 0 ? "(".number_format(abs($account_1090000[1])).")" : number_format($account_1090000[1])).'</td>
+								<td align="right" class="">'.($account_1090000[4] < 0 ? "(".number_format(abs($account_1090000[4])).")" : number_format($account_1090000[4])).'</td>
+								<td align="right" class="">'.($account_1090000[3] < 0 ? "(".number_format(abs($account_1090000[3])).")" : number_format($account_1090000[3])).'</td>
+								<td align="right" class="">'.($account_1090000[2] < 0 ? "(".number_format(abs($account_1090000[2])).")" : number_format($account_1090000[2])).'</td>
+								<td align="right" class="">'.($account_1090000[5] < 0 ? "(".number_format(abs($account_1090000[5])).")" : number_format($account_1090000[5])).'</td>
+							</tr>';
+				$print .= '	<tr><td align="left" >&nbsp;&nbsp;&nbsp;&nbsp;Peralatan Rumah Sakit</td>
+								<td align="right" class="">'.($account_aset_lain_konsolidasi < 0 ? "(".number_format(abs($account_aset_lain_konsolidasi)).")" : number_format($account_aset_lain_konsolidasi)).'</td>
+								<td align="right" class="">'.($account_1090000[0] < 0 ? "(".number_format(abs($account_1090000[0])).")" : number_format($account_1090000[0])).'</td>
+								<td align="right" class="">'.($account_1090000[1] < 0 ? "(".number_format(abs($account_1090000[1])).")" : number_format($account_1090000[1])).'</td>
+								<td align="right" class="">'.($account_1090000[4] < 0 ? "(".number_format(abs($account_1090000[4])).")" : number_format($account_1090000[4])).'</td>
+								<td align="right" class="">'.($account_1090000[3] < 0 ? "(".number_format(abs($account_1090000[3])).")" : number_format($account_1090000[3])).'</td>
+								<td align="right" class="">'.($account_1090000[2] < 0 ? "(".number_format(abs($account_1090000[2])).")" : number_format($account_1090000[2])).'</td>
+								<td align="right" class="">'.($account_1090000[5] < 0 ? "(".number_format(abs($account_1090000[5])).")" : number_format($account_1090000[5])).'</td>
+							</tr>';
+				$print .= '	<tr><td align="left" >&nbsp;&nbsp;&nbsp;&nbsp;Furniture, Fixture & IT</td>
+								<td align="right" class="">'.($account_aset_lain_konsolidasi < 0 ? "(".number_format(abs($account_aset_lain_konsolidasi)).")" : number_format($account_aset_lain_konsolidasi)).'</td>
+								<td align="right" class="">'.($account_1090000[0] < 0 ? "(".number_format(abs($account_1090000[0])).")" : number_format($account_1090000[0])).'</td>
+								<td align="right" class="">'.($account_1090000[1] < 0 ? "(".number_format(abs($account_1090000[1])).")" : number_format($account_1090000[1])).'</td>
+								<td align="right" class="">'.($account_1090000[4] < 0 ? "(".number_format(abs($account_1090000[4])).")" : number_format($account_1090000[4])).'</td>
+								<td align="right" class="">'.($account_1090000[3] < 0 ? "(".number_format(abs($account_1090000[3])).")" : number_format($account_1090000[3])).'</td>
+								<td align="right" class="">'.($account_1090000[2] < 0 ? "(".number_format(abs($account_1090000[2])).")" : number_format($account_1090000[2])).'</td>
+								<td align="right" class="">'.($account_1090000[5] < 0 ? "(".number_format(abs($account_1090000[5])).")" : number_format($account_1090000[5])).'</td>
+							</tr>';
+				$print .= '	<tr><td align="left" >&nbsp;&nbsp;&nbsp;&nbsp;Peralatan Kantor</td>
+								<td align="right" class="border_btm">'.($account_aset_lain_konsolidasi < 0 ? "(".number_format(abs($account_aset_lain_konsolidasi)).")" : number_format($account_aset_lain_konsolidasi)).'</td>
+								<td align="right" class="border_btm">'.($account_1090000[0] < 0 ? "(".number_format(abs($account_1090000[0])).")" : number_format($account_1090000[0])).'</td>
+								<td align="right" class="border_btm">'.($account_1090000[1] < 0 ? "(".number_format(abs($account_1090000[1])).")" : number_format($account_1090000[1])).'</td>
+								<td align="right" class="border_btm">'.($account_1090000[4] < 0 ? "(".number_format(abs($account_1090000[4])).")" : number_format($account_1090000[4])).'</td>
+								<td align="right" class="border_btm">'.($account_1090000[3] < 0 ? "(".number_format(abs($account_1090000[3])).")" : number_format($account_1090000[3])).'</td>
+								<td align="right" class="border_btm">'.($account_1090000[2] < 0 ? "(".number_format(abs($account_1090000[2])).")" : number_format($account_1090000[2])).'</td>
+								<td align="right" class="border_btm">'.($account_1090000[5] < 0 ? "(".number_format(abs($account_1090000[5])).")" : number_format($account_1090000[5])).'</td>
+							</tr>';
+				$print .= '	<tr><td align="left" >Total Aset Tetap</td>
+								<td align="right" class="border_btm"><b>'.($account_aset_konsolidasi < 0 ? "(".number_format(abs($account_aset_konsolidasi)).")" : number_format($account_aset_konsolidasi)).'</b></td>
+								<td align="right" class="border_btm"><b>'.($account_aset[0] < 0 ? "(".number_format(abs($account_aset[0])).")" : number_format($account_aset[0])).'</b></td>
+								<td align="right" class="border_btm"><b>'.($account_aset[1] < 0 ? "(".number_format(abs($account_aset[1])).")" : number_format($account_aset[1])).'</b></td>
+								<td align="right" class="border_btm"><b>'.($account_aset[4] < 0 ? "(".number_format(abs($account_aset[4])).")" : number_format($account_aset[4])).'</b></td>
+								<td align="right" class="border_btm"><b>'.($account_aset[3] < 0 ? "(".number_format(abs($account_aset[3])).")" : number_format($account_aset[3])).'</b></td>
+								<td align="right" class="border_btm"><b>'.($account_aset[2] < 0 ? "(".number_format(abs($account_aset[2])).")" : number_format($account_aset[2])).'</b></td>
+								<td align="right" class="border_btm"><b>'.($account_aset[5] < 0 ? "(".number_format(abs($account_aset[5])).")" : number_format($account_aset[5])).'</b></td>
+							</tr>';
+							
+				
+				$print .= '	<tr><td align="left" colspan="8" ></td></tr>';	
+				$print .= '	<tr><td align="left" >Akumulasi Penyusutan Aset Tetap</td>
+								<td align="right" class="border_btm"><b>'.($account_aset_konsolidasi < 0 ? "(".number_format(abs($account_aset_konsolidasi)).")" : number_format($account_aset_konsolidasi)).'</b></td>
+								<td align="right" class="border_btm"><b>'.($account_aset[0] < 0 ? "(".number_format(abs($account_aset[0])).")" : number_format($account_aset[0])).'</b></td>
+								<td align="right" class="border_btm"><b>'.($account_aset[1] < 0 ? "(".number_format(abs($account_aset[1])).")" : number_format($account_aset[1])).'</b></td>
+								<td align="right" class="border_btm"><b>'.($account_aset[4] < 0 ? "(".number_format(abs($account_aset[4])).")" : number_format($account_aset[4])).'</b></td>
+								<td align="right" class="border_btm"><b>'.($account_aset[3] < 0 ? "(".number_format(abs($account_aset[3])).")" : number_format($account_aset[3])).'</b></td>
+								<td align="right" class="border_btm"><b>'.($account_aset[2] < 0 ? "(".number_format(abs($account_aset[2])).")" : number_format($account_aset[2])).'</b></td>
+								<td align="right" class="border_btm"><b>'.($account_aset[5] < 0 ? "(".number_format(abs($account_aset[5])).")" : number_format($account_aset[5])).'</b></td>
+							</tr>';
+				$print .= '	<tr><td align="left" ><b>Total Aset Tetap - Bersih</b></td>
+								<td align="right" class="border_btm"><b>'.($account_aset_konsolidasi < 0 ? "(".number_format(abs($account_aset_konsolidasi)).")" : number_format($account_aset_konsolidasi)).'</b></td>
+								<td align="right" class="border_btm"><b>'.($account_aset[0] < 0 ? "(".number_format(abs($account_aset[0])).")" : number_format($account_aset[0])).'</b></td>
+								<td align="right" class="border_btm"><b>'.($account_aset[1] < 0 ? "(".number_format(abs($account_aset[1])).")" : number_format($account_aset[1])).'</b></td>
+								<td align="right" class="border_btm"><b>'.($account_aset[4] < 0 ? "(".number_format(abs($account_aset[4])).")" : number_format($account_aset[4])).'</b></td>
+								<td align="right" class="border_btm"><b>'.($account_aset[3] < 0 ? "(".number_format(abs($account_aset[3])).")" : number_format($account_aset[3])).'</b></td>
+								<td align="right" class="border_btm"><b>'.($account_aset[2] < 0 ? "(".number_format(abs($account_aset[2])).")" : number_format($account_aset[2])).'</b></td>
+								<td align="right" class="border_btm"><b>'.($account_aset[5] < 0 ? "(".number_format(abs($account_aset[5])).")" : number_format($account_aset[5])).'</b></td>
+							</tr>';
+							
+				
+				
+				//JUMLAH ASET
+				for($branch=0; $branch <=5; $branch++){
+					$account_aset[$branch] += $account_aset_lancar[$branch] + $account_aset_tidak_lancar[$branch];
+					$account_aset_konsolidasi += $account_aset_lancar[$branch] + $account_aset_tidak_lancar[$branch];
+				}
+				
+				$account_aset_tidak_lancar_konsolidasi = $account_aset_tetap_konsolidasi + $account_aset_lain_konsolidasi;
+				$print .= '	<tr><td>&nbsp;</td><td align="left" colspan="7" class="border_btm"></td></tr>';
+				$print .= '	<tr><td align="left" ><b>TOTAL ASET</b></td>
+								<td align="right" class="border_btm_double"><b>'.($account_aset_konsolidasi < 0 ? "(".number_format(abs($account_aset_konsolidasi)).")" : number_format($account_aset_konsolidasi)).'</b></td>
+								<td align="right" class="border_btm_double"><b>'.($account_aset[0] < 0 ? "(".number_format(abs($account_aset[0])).")" : number_format($account_aset[0])).'</b></td>
+								<td align="right" class="border_btm_double"><b>'.($account_aset[1] < 0 ? "(".number_format(abs($account_aset[1])).")" : number_format($account_aset[1])).'</b></td>
+								<td align="right" class="border_btm_double"><b>'.($account_aset[4] < 0 ? "(".number_format(abs($account_aset[4])).")" : number_format($account_aset[4])).'</b></td>
+								<td align="right" class="border_btm_double"><b>'.($account_aset[3] < 0 ? "(".number_format(abs($account_aset[3])).")" : number_format($account_aset[3])).'</b></td>
+								<td align="right" class="border_btm_double"><b>'.($account_aset[2] < 0 ? "(".number_format(abs($account_aset[2])).")" : number_format($account_aset[2])).'</b></td>
+								<td align="right" class="border_btm_double"><b>'.($account_aset[5] < 0 ? "(".number_format(abs($account_aset[5])).")" : number_format($account_aset[5])).'</b></td>
+							</tr>';
+				
+				$print .= '	<tr><td align="left" colspan="8" >&nbsp;</td></tr>';	
+				$print .= '	<tr><td align="left" ><b>KEWAJIBAN</b></td><td colspan="7"></td></tr>';				
+				$print .= '	<tr><td align="left" ><b>Kewajiban Jangka Pendek</b></td><td colspan="7"></td></tr>';
+				$print .= '	<tr><td align="left" >&nbsp;&nbsp;&nbsp;&nbsp;Simpanan anggota</td>
+								<td align="right" class="">'.($account_aset_lain_konsolidasi < 0 ? "(".number_format(abs($account_aset_lain_konsolidasi)).")" : number_format($account_aset_lain_konsolidasi)).'</td>
+								<td align="right" class="">'.($account_1090000[0] < 0 ? "(".number_format(abs($account_1090000[0])).")" : number_format($account_1090000[0])).'</td>
+								<td align="right" class="">'.($account_1090000[1] < 0 ? "(".number_format(abs($account_1090000[1])).")" : number_format($account_1090000[1])).'</td>
+								<td align="right" class="">'.($account_1090000[4] < 0 ? "(".number_format(abs($account_1090000[4])).")" : number_format($account_1090000[4])).'</td>
+								<td align="right" class="">'.($account_1090000[3] < 0 ? "(".number_format(abs($account_1090000[3])).")" : number_format($account_1090000[3])).'</td>
+								<td align="right" class="">'.($account_1090000[2] < 0 ? "(".number_format(abs($account_1090000[2])).")" : number_format($account_1090000[2])).'</td>
+								<td align="right" class="">'.($account_1090000[5] < 0 ? "(".number_format(abs($account_1090000[5])).")" : number_format($account_1090000[5])).'</td>
+							</tr>';
+				$print .= '	<tr><td align="left" >&nbsp;&nbsp;&nbsp;&nbsp;Simpanan berjangka</td>
+								<td align="right" class="">'.($account_aset_lain_konsolidasi < 0 ? "(".number_format(abs($account_aset_lain_konsolidasi)).")" : number_format($account_aset_lain_konsolidasi)).'</td>
+								<td align="right" class="">'.($account_1090000[0] < 0 ? "(".number_format(abs($account_1090000[0])).")" : number_format($account_1090000[0])).'</td>
+								<td align="right" class="">'.($account_1090000[1] < 0 ? "(".number_format(abs($account_1090000[1])).")" : number_format($account_1090000[1])).'</td>
+								<td align="right" class="">'.($account_1090000[4] < 0 ? "(".number_format(abs($account_1090000[4])).")" : number_format($account_1090000[4])).'</td>
+								<td align="right" class="">'.($account_1090000[3] < 0 ? "(".number_format(abs($account_1090000[3])).")" : number_format($account_1090000[3])).'</td>
+								<td align="right" class="">'.($account_1090000[2] < 0 ? "(".number_format(abs($account_1090000[2])).")" : number_format($account_1090000[2])).'</td>
+								<td align="right" class="">'.($account_1090000[5] < 0 ? "(".number_format(abs($account_1090000[5])).")" : number_format($account_1090000[5])).'</td>
+							</tr>';
+				$print .= '	<tr><td align="left" >&nbsp;&nbsp;&nbsp;&nbsp;Utang lain-lain</td>
+								<td align="right" class="border_btm">'.($account_aset_lain_konsolidasi < 0 ? "(".number_format(abs($account_aset_lain_konsolidasi)).")" : number_format($account_aset_lain_konsolidasi)).'</td>
+								<td align="right" class="border_btm">'.($account_1090000[0] < 0 ? "(".number_format(abs($account_1090000[0])).")" : number_format($account_1090000[0])).'</td>
+								<td align="right" class="border_btm">'.($account_1090000[1] < 0 ? "(".number_format(abs($account_1090000[1])).")" : number_format($account_1090000[1])).'</td>
+								<td align="right" class="border_btm">'.($account_1090000[4] < 0 ? "(".number_format(abs($account_1090000[4])).")" : number_format($account_1090000[4])).'</td>
+								<td align="right" class="border_btm">'.($account_1090000[3] < 0 ? "(".number_format(abs($account_1090000[3])).")" : number_format($account_1090000[3])).'</td>
+								<td align="right" class="border_btm">'.($account_1090000[2] < 0 ? "(".number_format(abs($account_1090000[2])).")" : number_format($account_1090000[2])).'</td>
+								<td align="right" class="border_btm">'.($account_1090000[5] < 0 ? "(".number_format(abs($account_1090000[5])).")" : number_format($account_1090000[5])).'</td>
+							</tr>';
+				$print .= '	<tr><td align="left" >Total Kewajiban Lancar</td>
+								<td align="right" class="border_btm">'.($account_aset_lain_konsolidasi < 0 ? "(".number_format(abs($account_aset_lain_konsolidasi)).")" : number_format($account_aset_lain_konsolidasi)).'</td>
+								<td align="right" class="border_btm">'.($account_1090000[0] < 0 ? "(".number_format(abs($account_1090000[0])).")" : number_format($account_1090000[0])).'</td>
+								<td align="right" class="border_btm">'.($account_1090000[1] < 0 ? "(".number_format(abs($account_1090000[1])).")" : number_format($account_1090000[1])).'</td>
+								<td align="right" class="border_btm">'.($account_1090000[4] < 0 ? "(".number_format(abs($account_1090000[4])).")" : number_format($account_1090000[4])).'</td>
+								<td align="right" class="border_btm">'.($account_1090000[3] < 0 ? "(".number_format(abs($account_1090000[3])).")" : number_format($account_1090000[3])).'</td>
+								<td align="right" class="border_btm">'.($account_1090000[2] < 0 ? "(".number_format(abs($account_1090000[2])).")" : number_format($account_1090000[2])).'</td>
+								<td align="right" class="border_btm">'.($account_1090000[5] < 0 ? "(".number_format(abs($account_1090000[5])).")" : number_format($account_1090000[5])).'</td>
+							</tr>';
+							
+				$print .= '	<tr><td align="left" colspan="8" ></td></tr>';	
+				$print .= '	<tr><td align="left" ><b>Kewajiban Jangka Panjang</b></td><td colspan="7"></td></tr>';
+				$print .= '	<tr><td align="left" >&nbsp;&nbsp;&nbsp;&nbsp;Hutang Bank</td>
+								<td align="right" class="">'.($account_aset_lain_konsolidasi < 0 ? "(".number_format(abs($account_aset_lain_konsolidasi)).")" : number_format($account_aset_lain_konsolidasi)).'</td>
+								<td align="right" class="">'.($account_1090000[0] < 0 ? "(".number_format(abs($account_1090000[0])).")" : number_format($account_1090000[0])).'</td>
+								<td align="right" class="">'.($account_1090000[1] < 0 ? "(".number_format(abs($account_1090000[1])).")" : number_format($account_1090000[1])).'</td>
+								<td align="right" class="">'.($account_1090000[4] < 0 ? "(".number_format(abs($account_1090000[4])).")" : number_format($account_1090000[4])).'</td>
+								<td align="right" class="">'.($account_1090000[3] < 0 ? "(".number_format(abs($account_1090000[3])).")" : number_format($account_1090000[3])).'</td>
+								<td align="right" class="">'.($account_1090000[2] < 0 ? "(".number_format(abs($account_1090000[2])).")" : number_format($account_1090000[2])).'</td>
+								<td align="right" class="">'.($account_1090000[5] < 0 ? "(".number_format(abs($account_1090000[5])).")" : number_format($account_1090000[5])).'</td>
+							</tr>';
+				$print .= '	<tr><td align="left" >&nbsp;&nbsp;&nbsp;&nbsp;Hutang Leasing</td>
+								<td align="right" class="border_btm">'.($account_aset_lain_konsolidasi < 0 ? "(".number_format(abs($account_aset_lain_konsolidasi)).")" : number_format($account_aset_lain_konsolidasi)).'</td>
+								<td align="right" class="border_btm">'.($account_1090000[0] < 0 ? "(".number_format(abs($account_1090000[0])).")" : number_format($account_1090000[0])).'</td>
+								<td align="right" class="border_btm">'.($account_1090000[1] < 0 ? "(".number_format(abs($account_1090000[1])).")" : number_format($account_1090000[1])).'</td>
+								<td align="right" class="border_btm">'.($account_1090000[4] < 0 ? "(".number_format(abs($account_1090000[4])).")" : number_format($account_1090000[4])).'</td>
+								<td align="right" class="border_btm">'.($account_1090000[3] < 0 ? "(".number_format(abs($account_1090000[3])).")" : number_format($account_1090000[3])).'</td>
+								<td align="right" class="border_btm">'.($account_1090000[2] < 0 ? "(".number_format(abs($account_1090000[2])).")" : number_format($account_1090000[2])).'</td>
+								<td align="right" class="border_btm">'.($account_1090000[5] < 0 ? "(".number_format(abs($account_1090000[5])).")" : number_format($account_1090000[5])).'</td>
+							</tr>';
+				$print .= '	<tr><td align="left" >Total Kewajiban Jangka Panjang</td>
+								<td align="right" class="border_btm">'.($account_aset_lain_konsolidasi < 0 ? "(".number_format(abs($account_aset_lain_konsolidasi)).")" : number_format($account_aset_lain_konsolidasi)).'</td>
+								<td align="right" class="border_btm">'.($account_1090000[0] < 0 ? "(".number_format(abs($account_1090000[0])).")" : number_format($account_1090000[0])).'</td>
+								<td align="right" class="border_btm">'.($account_1090000[1] < 0 ? "(".number_format(abs($account_1090000[1])).")" : number_format($account_1090000[1])).'</td>
+								<td align="right" class="border_btm">'.($account_1090000[4] < 0 ? "(".number_format(abs($account_1090000[4])).")" : number_format($account_1090000[4])).'</td>
+								<td align="right" class="border_btm">'.($account_1090000[3] < 0 ? "(".number_format(abs($account_1090000[3])).")" : number_format($account_1090000[3])).'</td>
+								<td align="right" class="border_btm">'.($account_1090000[2] < 0 ? "(".number_format(abs($account_1090000[2])).")" : number_format($account_1090000[2])).'</td>
+								<td align="right" class="border_btm">'.($account_1090000[5] < 0 ? "(".number_format(abs($account_1090000[5])).")" : number_format($account_1090000[5])).'</td>
+							</tr>';	
+				
+				//MODAL				
+				$print .= '	<tr><td align="left" colspan="8" ></td></tr>';	
+				$print .= '	<tr><td align="left" ><b>MODAL</b></td><td colspan="7"></td></tr>';
+				$print .= '	<tr><td align="left" >&nbsp;&nbsp;&nbsp;&nbsp;Simpanan Pokok</td>
+								<td align="right" class="">'.($account_aset_lain_konsolidasi < 0 ? "(".number_format(abs($account_aset_lain_konsolidasi)).")" : number_format($account_aset_lain_konsolidasi)).'</td>
+								<td align="right" class="">'.($account_1090000[0] < 0 ? "(".number_format(abs($account_1090000[0])).")" : number_format($account_1090000[0])).'</td>
+								<td align="right" class="">'.($account_1090000[1] < 0 ? "(".number_format(abs($account_1090000[1])).")" : number_format($account_1090000[1])).'</td>
+								<td align="right" class="">'.($account_1090000[4] < 0 ? "(".number_format(abs($account_1090000[4])).")" : number_format($account_1090000[4])).'</td>
+								<td align="right" class="">'.($account_1090000[3] < 0 ? "(".number_format(abs($account_1090000[3])).")" : number_format($account_1090000[3])).'</td>
+								<td align="right" class="">'.($account_1090000[2] < 0 ? "(".number_format(abs($account_1090000[2])).")" : number_format($account_1090000[2])).'</td>
+								<td align="right" class="">'.($account_1090000[5] < 0 ? "(".number_format(abs($account_1090000[5])).")" : number_format($account_1090000[5])).'</td>
+							</tr>';
+				$print .= '	<tr><td align="left" >&nbsp;&nbsp;&nbsp;&nbsp;Simpanan Wajib</td>
+								<td align="right" class="">'.($account_aset_lain_konsolidasi < 0 ? "(".number_format(abs($account_aset_lain_konsolidasi)).")" : number_format($account_aset_lain_konsolidasi)).'</td>
+								<td align="right" class="">'.($account_1090000[0] < 0 ? "(".number_format(abs($account_1090000[0])).")" : number_format($account_1090000[0])).'</td>
+								<td align="right" class="">'.($account_1090000[1] < 0 ? "(".number_format(abs($account_1090000[1])).")" : number_format($account_1090000[1])).'</td>
+								<td align="right" class="">'.($account_1090000[4] < 0 ? "(".number_format(abs($account_1090000[4])).")" : number_format($account_1090000[4])).'</td>
+								<td align="right" class="">'.($account_1090000[3] < 0 ? "(".number_format(abs($account_1090000[3])).")" : number_format($account_1090000[3])).'</td>
+								<td align="right" class="">'.($account_1090000[2] < 0 ? "(".number_format(abs($account_1090000[2])).")" : number_format($account_1090000[2])).'</td>
+								<td align="right" class="">'.($account_1090000[5] < 0 ? "(".number_format(abs($account_1090000[5])).")" : number_format($account_1090000[5])).'</td>
+							</tr>';
+				$print .= '	<tr><td align="left" >&nbsp;&nbsp;&nbsp;&nbsp;Hibah</td>
+								<td align="right" class="">'.($account_aset_lain_konsolidasi < 0 ? "(".number_format(abs($account_aset_lain_konsolidasi)).")" : number_format($account_aset_lain_konsolidasi)).'</td>
+								<td align="right" class="">'.($account_1090000[0] < 0 ? "(".number_format(abs($account_1090000[0])).")" : number_format($account_1090000[0])).'</td>
+								<td align="right" class="">'.($account_1090000[1] < 0 ? "(".number_format(abs($account_1090000[1])).")" : number_format($account_1090000[1])).'</td>
+								<td align="right" class="">'.($account_1090000[4] < 0 ? "(".number_format(abs($account_1090000[4])).")" : number_format($account_1090000[4])).'</td>
+								<td align="right" class="">'.($account_1090000[3] < 0 ? "(".number_format(abs($account_1090000[3])).")" : number_format($account_1090000[3])).'</td>
+								<td align="right" class="">'.($account_1090000[2] < 0 ? "(".number_format(abs($account_1090000[2])).")" : number_format($account_1090000[2])).'</td>
+								<td align="right" class="">'.($account_1090000[5] < 0 ? "(".number_format(abs($account_1090000[5])).")" : number_format($account_1090000[5])).'</td>
+							</tr>';
+				$print .= '	<tr><td align="left" >&nbsp;&nbsp;&nbsp;&nbsp;Modal Saham Ditempatkan</td>
+								<td align="right" class="">'.($account_aset_lain_konsolidasi < 0 ? "(".number_format(abs($account_aset_lain_konsolidasi)).")" : number_format($account_aset_lain_konsolidasi)).'</td>
+								<td align="right" class="">'.($account_1090000[0] < 0 ? "(".number_format(abs($account_1090000[0])).")" : number_format($account_1090000[0])).'</td>
+								<td align="right" class="">'.($account_1090000[1] < 0 ? "(".number_format(abs($account_1090000[1])).")" : number_format($account_1090000[1])).'</td>
+								<td align="right" class="">'.($account_1090000[4] < 0 ? "(".number_format(abs($account_1090000[4])).")" : number_format($account_1090000[4])).'</td>
+								<td align="right" class="">'.($account_1090000[3] < 0 ? "(".number_format(abs($account_1090000[3])).")" : number_format($account_1090000[3])).'</td>
+								<td align="right" class="">'.($account_1090000[2] < 0 ? "(".number_format(abs($account_1090000[2])).")" : number_format($account_1090000[2])).'</td>
+								<td align="right" class="">'.($account_1090000[5] < 0 ? "(".number_format(abs($account_1090000[5])).")" : number_format($account_1090000[5])).'</td>
+							</tr>';
+				$print .= '	<tr><td align="left" >&nbsp;&nbsp;&nbsp;&nbsp;Laba Ditahan</td>
+								<td align="right" class="border_btm">'.($account_aset_lain_konsolidasi < 0 ? "(".number_format(abs($account_aset_lain_konsolidasi)).")" : number_format($account_aset_lain_konsolidasi)).'</td>
+								<td align="right" class="border_btm">'.($account_1090000[0] < 0 ? "(".number_format(abs($account_1090000[0])).")" : number_format($account_1090000[0])).'</td>
+								<td align="right" class="border_btm">'.($account_1090000[1] < 0 ? "(".number_format(abs($account_1090000[1])).")" : number_format($account_1090000[1])).'</td>
+								<td align="right" class="border_btm">'.($account_1090000[4] < 0 ? "(".number_format(abs($account_1090000[4])).")" : number_format($account_1090000[4])).'</td>
+								<td align="right" class="border_btm">'.($account_1090000[3] < 0 ? "(".number_format(abs($account_1090000[3])).")" : number_format($account_1090000[3])).'</td>
+								<td align="right" class="border_btm">'.($account_1090000[2] < 0 ? "(".number_format(abs($account_1090000[2])).")" : number_format($account_1090000[2])).'</td>
+								<td align="right" class="border_btm">'.($account_1090000[5] < 0 ? "(".number_format(abs($account_1090000[5])).")" : number_format($account_1090000[5])).'</td>
+							</tr>';
+				$print .= '	<tr><td align="left" >Total Modal</td>
+								<td align="right" class="border_btm">'.($account_aset_lain_konsolidasi < 0 ? "(".number_format(abs($account_aset_lain_konsolidasi)).")" : number_format($account_aset_lain_konsolidasi)).'</td>
+								<td align="right" class="border_btm">'.($account_1090000[0] < 0 ? "(".number_format(abs($account_1090000[0])).")" : number_format($account_1090000[0])).'</td>
+								<td align="right" class="border_btm">'.($account_1090000[1] < 0 ? "(".number_format(abs($account_1090000[1])).")" : number_format($account_1090000[1])).'</td>
+								<td align="right" class="border_btm">'.($account_1090000[4] < 0 ? "(".number_format(abs($account_1090000[4])).")" : number_format($account_1090000[4])).'</td>
+								<td align="right" class="border_btm">'.($account_1090000[3] < 0 ? "(".number_format(abs($account_1090000[3])).")" : number_format($account_1090000[3])).'</td>
+								<td align="right" class="border_btm">'.($account_1090000[2] < 0 ? "(".number_format(abs($account_1090000[2])).")" : number_format($account_1090000[2])).'</td>
+								<td align="right" class="border_btm">'.($account_1090000[5] < 0 ? "(".number_format(abs($account_1090000[5])).")" : number_format($account_1090000[5])).'</td>
+							</tr>';			
+				
+				//TOTAL MODAL + KEWAJIBAN				
+				$print .= '	<tr><td align="left" colspan="8" >&nbsp;</td></tr>';	
+				$print .= '	<tr><td align="left" ><b>TOTAL KEWAJIBAN & MODAL</b></td>
+								<td align="right" class="border_btm_double">'.($account_aset_lain_konsolidasi < 0 ? "(".number_format(abs($account_aset_lain_konsolidasi)).")" : number_format($account_aset_lain_konsolidasi)).'</td>
+								<td align="right" class="border_btm_double">'.($account_1090000[0] < 0 ? "(".number_format(abs($account_1090000[0])).")" : number_format($account_1090000[0])).'</td>
+								<td align="right" class="border_btm_double">'.($account_1090000[1] < 0 ? "(".number_format(abs($account_1090000[1])).")" : number_format($account_1090000[1])).'</td>
+								<td align="right" class="border_btm_double">'.($account_1090000[4] < 0 ? "(".number_format(abs($account_1090000[4])).")" : number_format($account_1090000[4])).'</td>
+								<td align="right" class="border_btm_double">'.($account_1090000[3] < 0 ? "(".number_format(abs($account_1090000[3])).")" : number_format($account_1090000[3])).'</td>
+								<td align="right" class="border_btm_double">'.($account_1090000[2] < 0 ? "(".number_format(abs($account_1090000[2])).")" : number_format($account_1090000[2])).'</td>
+								<td align="right" class="border_btm_double">'.($account_1090000[5] < 0 ? "(".number_format(abs($account_1090000[5])).")" : number_format($account_1090000[5])).'</td>
+							</tr>';		

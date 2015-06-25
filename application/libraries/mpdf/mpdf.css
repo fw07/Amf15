@@ -1,0 +1,64 @@
+/*
+   This is a secondary default stylesheet for mPDF
+   It will only parse element-level CSS here 
+   Remove the comment marks below and edit as required
+*/
+
+
+
+/* 
+   These values used to be the default prior to mPDF 4.2
+   Altered to make appearance closer to that of browsers
+   Uncomment these lines to return to behaviour prior to v4.2  
+*/
+
+body{
+	font-size: 10pt;
+	font-family: "Helvetica Neue", "Arial";
+}
+
+h1{ padding:0; margin:0; } 
+img { margin: 0.83em 0; vertical-align: bottom; }
+table { margin: 0.5em; }
+textarea { vertical-align: top; }
+table{
+	border-collapse: collapse;
+}
+td, th {
+	border: 1px solid #000;
+	padding: 3px;
+	border-collapse: collapse;
+}
+.text-right{ text-align: right; }
+.text-center{ text-align: center; }
+
+.tbl{
+	border-collapse: collapse;
+	border: none;
+	font-size: 10pt;
+}
+.tbl thead{
+	border-bottom: 2px solid #000;
+}
+.tbl td, .tbl th{
+	padding: 0 3px;
+	border: 1px solid #333;
+}
+.clear{
+	float: none;
+	clear: both
+}
+#topsheet{
+	width: 100%;
+	float: none;
+	clear: both;
+	padding-bottom: 20px;
+}
+.topsheet_head{
+	width: 250px;
+	float: left;
+	font-size: 10pt;
+}
+.topsheet_head table,.topsheet_head table td{
+	border: none;
+}

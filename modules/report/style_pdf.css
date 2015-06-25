@@ -1,0 +1,9 @@
+body{
+	font-size: 10pt;
+	font-family: "Helvetica Neue", "Arial";
+}
+
+td, th {
+	border: 1px solid #fff;
+	padding: 3px;
+}

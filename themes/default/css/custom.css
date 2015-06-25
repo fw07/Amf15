@@ -1,0 +1,46 @@
+.container{
+	width: 100%;
+}
+.table>thead>tr>th{
+	vertical-align: middle;
+}
+.inp80{
+	width: 80px;
+}
+.inp30{
+	width: 30px;
+	text-align: center;
+}
+.inp90{
+	width: 90px;
+}
+.inp50{
+	width: 50px;
+}
+
+.break{page-break-before:always}
+.panel-body{ overflow: auto; }
+td.bdr_btm{
+	border-left: none;
+	border-right: 1px solid red;
+}
+a.link{
+	border-bottom: 1px dotted #555;
+} 
+
+.navbar-brand img {
+	max-height: 30px;
+}
+td.border_btm{
+	border-bottom: 1px solid #333;
+}
+td.border_btm_double{
+	border-bottom: 2px solid #333;
+}
+
+.bg_highlight{
+	background: #DFEEEE;
+}
+.font_bold{
+	font-weight: bold;
+}
