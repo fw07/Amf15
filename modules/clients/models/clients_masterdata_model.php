@@ -10,7 +10,7 @@
  
 class clients_masterdata_model extends MY_Model {
 
-    protected $table        = 'tbl_masterdata';
+    protected $table        = 'tbl_clients';
     protected $key          = 'data_id';
     protected $soft_deletes = true;
     protected $date_format  = 'datetime';
@@ -29,7 +29,7 @@ class clients_masterdata_model extends MY_Model {
 	
 	public function count_anggota()
 	{
-		return $this->db->count_all('tbl_masterdata');
+		return $this->db->count_all('tbl_clients');
 		
 	}
 	

@@ -81,6 +81,16 @@ class clients_model extends MY_Model {
 						->result();
 		}
 	}
+
+	public function get_all_investors_list()
+	{
+		return $this->db->select('lender_id, lender_code, lender_name')
+						->from('tbl_lenders')
+						->where('tbl_lenders.deleted','0')
+						->order_by('lender_id','ASC')
+						->get()
+						->result();
+	}
 	
 	public function count_all($search)
 	{

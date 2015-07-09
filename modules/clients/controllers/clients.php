@@ -95,10 +95,12 @@ class Clients extends Front_Controller{
 		
 		$officer = $this->officer_model->get_all_officer();
 		$group = $this->group_model->get_all();
+		$investor = $this->clients_model->get_all_investors_list();
 		$this->template	->set('menu_title', 'Registrasi Anggota')
 							->set('client', $data)
 							->set('group', $group)
 							->set('officer', $officer)
+							->set('investor', $investor)
 							->set('menu_client', 'active')
 							->build('client_register');	
 		
@@ -118,9 +120,11 @@ class Clients extends Front_Controller{
 		
 		$officer = $this->officer_model->get_all_officer();
 		$group = $this->group_model->get_all();
+		$investor = $this->clients_model->get_all_investors_list();
 		$this->template	->set('client', $data)
 						->set('group', $group)
 						->set('officer', $officer)
+						->set('investor', $investor)
 						->set('menu_title', 'Edit Anggota')
 						->set('menu_client', 'active')
 						->build('client_register');	
@@ -187,27 +191,28 @@ class Clients extends Front_Controller{
 			
 			//process the form
 			$data = array(
-					'client_group'	     	=> $this->input->post('client_group'),
-					'client_subgroup'	   	=> $this->input->post('client_subgroup'),
-					'client_officer'      	=> $this->input->post('client_officer'),
-					'client_account'	    => $client_account,
-					'client_no'	    		=> $client_no,
-					'client_fullname'      	=> $this->input->post('client_fullname'),
-					'client_simplename'	    => $this->input->post('client_simplename'),
-					'client_martialstatus'	=> $this->input->post('client_martialstatus'),
-					'client_birthplace'	    => $this->input->post('client_birthplace'),
-					'client_birthdate'	    => $this->input->post('client_birthdate'),
-					'client_rt'				=> $this->input->post('client_rt'),
-					'client_rw'				=> $this->input->post('client_rw'),
-					'client_kampung'		=> $this->input->post('client_kampung'),
-					'client_desa'			=> $this->input->post('client_desa'),
-					'client_kecamatan'		=> $this->input->post('client_kecamatan'),
-					'client_ktp'			=> $this->input->post('client_ktp'),
-					'client_religion'		=> $this->input->post('client_religion'),
-					'client_education'		=> $this->input->post('client_education'),
-					'client_job'			=> $this->input->post('client_job'),
-					'client_comodity'		=> $this->input->post('client_comodity'),
-					'client_phone'		=> $this->input->post('client_phone')
+					'client_group'	     		=> $this->input->post('client_group'),
+					'client_subgroup'	   		=> $this->input->post('client_subgroup'),
+					'client_officer'      		=> $this->input->post('client_officer'),
+					'client_account'	    	=> $client_account,
+					'client_no'	    			=> $client_no,
+					'client_fullname'      		=> $this->input->post('client_fullname'),
+					'client_simplename'	    	=> $this->input->post('client_simplename'),
+					'client_martialstatus'		=> $this->input->post('client_martialstatus'),
+					'client_birthplace'	    	=> $this->input->post('client_birthplace'),
+					'client_birthdate'	    	=> $this->input->post('client_birthdate'),
+					'client_rt'					=> $this->input->post('client_rt'),
+					'client_rw'					=> $this->input->post('client_rw'),
+					'client_kampung'			=> $this->input->post('client_kampung'),
+					'client_desa'				=> $this->input->post('client_desa'),
+					'client_kecamatan'			=> $this->input->post('client_kecamatan'),
+					'client_ktp'				=> $this->input->post('client_ktp'),
+					'client_religion'			=> $this->input->post('client_religion'),
+					'client_education'			=> $this->input->post('client_education'),
+					'client_job'				=> $this->input->post('client_job'),
+					'client_comodity'			=> $this->input->post('client_comodity'),
+					'client_phone'				=> $this->input->post('client_phone'),
+					'client_pembiayaan_sumber'	=> $this->input->post('client_pembiayaan_sumber')
 			);
 			
 			if(!$id)
@@ -794,25 +799,25 @@ class Clients extends Front_Controller{
 	public function saving_reg(){
 		//process the form
 			$data = array(
-					'client_group'	     	=> $this->input->post('client_group'),
-					'client_officer'      	=> $this->input->post('client_officer'),
-					'client_account'	    => $client_account,
-					'client_no'	    		=> $client_no,
-					'client_fullname'      	=> $this->input->post('client_fullname'),
-					'client_simplename'	    => $this->input->post('client_simplename'),
-					'client_martialstatus'	=> $this->input->post('client_martialstatus'),
-					'client_birthplace'	    => $this->input->post('client_birthplace'),
-					'client_birthdate'	    => $this->input->post('client_birthdate'),
-					'client_rt'				=> $this->input->post('client_rt'),
-					'client_rw'				=> $this->input->post('client_rw'),
-					'client_kampung'		=> $this->input->post('client_kampung'),
-					'client_desa'			=> $this->input->post('client_desa'),
-					'client_kecamatan'		=> $this->input->post('client_kecamatan'),
-					'client_ktp'			=> $this->input->post('client_ktp'),
-					'client_religion'		=> $this->input->post('client_religion'),
-					'client_education'		=> $this->input->post('client_education'),
-					'client_job'			=> $this->input->post('client_job'),
-					'client_comodity'		=> $this->input->post('client_comodity')
+					'client_group'	     		=> $this->input->post('client_group'),
+					'client_officer'      		=> $this->input->post('client_officer'),
+					'client_account'	    	=> $client_account,
+					'client_no'	    			=> $client_no,
+					'client_fullname'      		=> $this->input->post('client_fullname'),
+					'client_simplename'	    	=> $this->input->post('client_simplename'),
+					'client_martialstatus'		=> $this->input->post('client_martialstatus'),
+					'client_birthplace'	    	=> $this->input->post('client_birthplace'),
+					'client_birthdate'	    	=> $this->input->post('client_birthdate'),
+					'client_rt'					=> $this->input->post('client_rt'),
+					'client_rw'					=> $this->input->post('client_rw'),
+					'client_kampung'			=> $this->input->post('client_kampung'),
+					'client_desa'				=> $this->input->post('client_desa'),
+					'client_kecamatan'			=> $this->input->post('client_kecamatan'),
+					'client_ktp'				=> $this->input->post('client_ktp'),
+					'client_religion'			=> $this->input->post('client_religion'),
+					'client_education'			=> $this->input->post('client_education'),
+					'client_job'				=> $this->input->post('client_job'),
+					'client_comodity'			=> $this->input->post('client_comodity')
 			);
 			
 		
