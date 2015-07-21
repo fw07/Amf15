@@ -153,6 +153,13 @@ $user_level = $this->session->userdata('user_level');
 												<li><a href="<?php echo site_url(); ?>/branch/group_performance"> <i class="fa fa-angle-right"></i>  <span>Kehadiran Majelis</span></a></li>
 											</ul>
 										</li>
+										<li class="<?php echo $menu_investor; ?>">
+											<a href="#layout"> <i class="fa fa-usd icon"> <b class="bg-warning dker"></b> </i>  <span class="pull-right"> <i class="fa fa-angle-down text"></i> <i class="fa fa-angle-up text-active"></i> </span>  <span>Investor</span></a>
+											<ul class="nav lt">
+												<li><a href="<?php echo site_url(); ?>/lenders"> <i class="fa fa-angle-right"></i>  <span>Data Investor</span></a></li>
+												<li><a href="<?php echo site_url(); ?>/lenders/registration"> <i class="fa fa-angle-right"></i>  <span>Registrasi Investor</span></a></li>
+											</ul>
+										</li>
 										<!--<li class="<?php echo $menu_office; ?>">
 											<a href="#uikit"> <i class="fa fa-building-o icon"> <b class="bg-success"></b> </i>  <span class="pull-right"> <i class="fa fa-angle-down text"></i> <i class="fa fa-angle-up text-active"></i> </span>  <span>Kantor Cabang</span></a>
 											<ul class="nav lt">

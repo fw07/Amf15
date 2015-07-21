@@ -22,7 +22,7 @@ class Lenders extends Front_Controller{
 		$this->load->library('pagination');		
 	}
 	
-	public function overview($page='0'){
+	public function index($page='0'){
 		if($this->session->userdata('logged_in'))
 		{
 			//$alllenders = $this->lenders_model->get_all_lenders()->result();
@@ -55,7 +55,7 @@ class Lenders extends Front_Controller{
 			$lenders = $this->lenders_model->get_some_lenders( $config['per_page'] , $page, $this->input->post('q'), $this->input->post('key'));
 			
 			$this->template->set('menu_title', 'Data Investor (Borrowers)')
-						   ->set('menu_client', 'active')
+						   ->set('menu_investor', 'active')
 						   ->set('lenders', $lenders)
 						   ->set('list', $list)
 						   ->set('no', $no)
@@ -70,24 +70,11 @@ class Lenders extends Front_Controller{
 			
 	}
 
-	public function summary(){
-		if($this->session->userdata('logged_in'))
-		{
-			$this->template->set('menu_title', 'Registrasi Investor')
-						   ->set('menu_client', 'active')
-						   ->set('form_type', 'registration')
-						   ->build('lender_registration');	
-		}else{
-		  //If no session, redirect to login page
-		  redirect('login', 'refresh');
-		}
-	}
-
 	public function registration(){
 		if($this->session->userdata('logged_in'))
 		{
 			$this->template->set('menu_title', 'Registrasi Investor')
-						   ->set('menu_client', 'active')
+						   ->set('menu_investor', 'active')
 						   ->set('form_type', 'registration')
 						   ->build('lender_registration');	
 		}else{
@@ -106,7 +93,7 @@ class Lenders extends Front_Controller{
 			//var_dump($lender_obj);
 			
 			$this->template->set('menu_title', 'Registrasi Investor')
-						   ->set('menu_client', 'active')
+						   ->set('menu_investor', 'active')
 						   ->set('form_type', 'edit')
 						   ->set('lender_id', $lender_id)
 						   ->set('lender_object', $lender_obj)
