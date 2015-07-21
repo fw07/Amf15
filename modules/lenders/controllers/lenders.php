@@ -141,6 +141,7 @@ class Lenders extends Front_Controller{
 						'person_address'		=> $this->input->post('person_address'),
 						'person_phone'			=> $this->input->post('person_phone'),
 						'person_email'		    => $this->input->post('person_email'),
+						'created_on'			=> date('Y-m-d H:i:s', strtotime('now')),
 						'created_by'			=> $this->session->userdata['user_id'],
 						'modified_by'			=> $this->session->userdata['user_id']
 			);	
