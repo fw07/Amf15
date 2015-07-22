@@ -48,17 +48,19 @@
 														<td></td>
 														<td>a. Anggota Awal</td>
 														<?php for($i=0; $i<count($officer_list); $i++) { ?>
+														<?php $no_clients_aggregate_awal = $no_clients_aggregate_awal + $officer_list[$i]['no_clients_awal']; ?>
 														<?php echo '<td align="right">'.$officer_list[$i]['no_clients_awal'].'</td>' ?>
 														<?php } ?>
-														<td align="right"><b><?php echo ''; ?></b></td>
+														<td align="right"><b><?php echo $no_clients_aggregate_awal; ?></b></td>
 													</tr>											
 													<tr>
 														<td></td>
 														<td>b. Anggota Akhir</td>
 														<?php for($i=0; $i<count($officer_list); $i++) { ?>
+														<?php $no_clients_aggregate_akhir = $no_clients_aggregate_akhir + $officer_list[$i]['no_clients_akhir']; ?>
 														<?php echo '<td align="right">'.$officer_list[$i]['no_clients_akhir'].'</td>' ?>
 														<?php } ?>
-														<td align="right"><b><?php echo ''; ?></b></td>
+														<td align="right"><b><?php echo $no_clients_aggregate_akhir; ?></b></td>
 													</tr>
 													<tr>
 														<td></td>
@@ -66,7 +68,7 @@
 														<?php for($i=0; $i<count($officer_list); $i++) { ?>
 														<?php echo '<td align="right"></td>' ?>
 														<?php } ?>
-														<td align="right"><b><?php //echo array_sum($officer_list[]['no_clients_akhir'])-array_sum($officer_list[]['no_clients_awal']); ?></b></td>
+														<td align="right"><b><?php echo $no_clients_aggregate_akhir-$no_clients_aggregate_awal; ?></b></td>
 													</tr>
 													<tr>
 														<td><b>2</b></td>
@@ -76,17 +78,19 @@
 														<td></td>
 														<td>a. Majelis Awal</td>
 														<?php for($i=0; $i<count($officer_list); $i++) { ?>
+														<?php $no_majelis_aggregate_awal = $no_majelis_aggregate_awal + $officer_list[$i]['no_majelis_awal']; ?>
 														<?php echo '<td align="right">'.$officer_list[$i]['no_majelis_awal'].'</td>' ?>
 														<?php } ?>
-														<td align="right"><b><?php echo ''; ?></b></td>
+														<td align="right"><b><?php echo $no_majelis_aggregate_awal; ?></b></td>
 													</tr>											
 													<tr>
 														<td></td>
 														<td>b. Majelis Akhir</td>
 														<?php for($i=0; $i<count($officer_list); $i++) { ?>
+														<?php $no_majelis_aggregate_akhir = $no_majelis_aggregate_akhir + $officer_list[$i]['no_majelis_akhir']; ?>
 														<?php echo '<td align="right">'.$officer_list[$i]['no_majelis_akhir'].'</td>' ?>
 														<?php } ?>
-														<td align="right"><b><?php echo ''; ?></b></td>
+														<td align="right"><b><?php echo $no_majelis_aggregate_akhir; ?></b></td>
 													</tr>
 													<tr>
 														<td></td>
@@ -94,179 +98,153 @@
 														<?php for($i=0; $i<count($officer_list); $i++) { ?>
 														<?php echo '<td align="right"></td>' ?>
 														<?php } ?>
-														<td align="right"><b><?php //echo array_sum($officer_list[]['no_clients_akhir'])-array_sum($officer_list[]['no_clients_awal']; ?></b></td>
+														<td align="right"><b><?php echo $no_majelis_aggregate_akhir-$no_majelis_aggregate_awal; ?></b></td>
 													</tr>
 													<tr>
 														<td><b>3</b></td>
 														<td colspan="4"><b>OUTSTANDING PINJAMAN</b></td>
-														<td colspan="2"><b><?php echo "Rp ".number_format(array_sum($total_outstanding_pinjaman_per_cabang_akhir)); ?></b></td>
 													</tr>												
 													<tr>
 														<td></td>
 														<td>a. OS Awal</td>
+														<?php echo '<td align="right">'.number_format($total_outstanding_pinjaman_awal).'</td>'; ?>
 														<?php for($i=0; $i<count($officer_list); $i++) { ?>
-														<?php echo '<td align="right">'.number_format($total_outstanding_pinjaman_per_cabang_awal[$i]).'</td>' ?>
+														<?php echo '<td align="right"></td>' ?>
 														<?php } ?>
-														<td align="right"><b><?php echo number_format(array_sum($total_outstanding_pinjaman_per_cabang_awal)); ?></b></td>
 													</tr>											
 													<tr>
 														<td></td>
 														<td>b. OS Akhir</td>
+														<?php echo '<td align="right">'.number_format($total_outstanding_pinjaman_akhir).'</td>' ?>
 														<?php for($i=0; $i<count($officer_list); $i++) { ?>
-														<?php echo '<td align="right">'.number_format($total_outstanding_pinjaman_per_cabang_akhir[$i]).'</td>' ?>
+														<?php echo '<td align="right"></td>' ?>
 														<?php } ?>
-														<td align="right"><b><?php echo number_format(array_sum($total_outstanding_pinjaman_per_cabang_akhir)); ?></b></td>
 													</tr>
 													<tr>
 														<td></td>
 														<td>Mutasi</td>
+														<td align="right"><b><?php echo "Rp ".number_format($total_outstanding_pinjaman_akhir-$total_outstanding_pinjaman_awal); ?></b></td>
 														<?php for($i=0; $i<count($officer_list); $i++) { ?>
 														<?php echo '<td align="right"></td>' ?>
 														<?php } ?>
-														<td align="right"><b><?php echo "Rp ".number_format(array_sum($total_outstanding_pinjaman_per_cabang_akhir)-array_sum($total_outstanding_pinjaman_per_cabang_awal)); ?></b></td>
 													</tr>
 													<tr>
 														<td><b>4</b></td>
 														<td colspan="4"><b>OUTSTANDING TABUNGAN SUKARELA</b></td>
-														<td colspan="2"><b><?php echo "Rp ".number_format($total_saldo_tabsukarela_akhir); ?></b></td>
 													</tr>												
 													<tr>
 														<td></td>
 														<td>a. OS Awal</td>
+														<?php echo '<td align="right">'.number_format($total_saldo_tabsukarela_awal).'</td>'; ?>
 														<?php for($i=0; $i<count($officer_list); $i++) { ?>
-														<?php echo '<td align="right">'.number_format($total_saldo_tabsukarela_per_cabang_awal[$i]).'</td>' ?>
+														<?php echo '<td align="right"></td>' ?>
 														<?php } ?>
-														<td align="right">
-															<b><?php echo number_format(array_sum($total_saldo_tabsukarela_per_cabang_awal));
-																	 //$total_saldo_tabsukarela_per_lastmonth; ?></b></td>
 													</tr>											
 													<tr>
 														<td></td>
 														<td>b. OS Akhir</td>
+														<?php echo '<td align="right">'.number_format($total_saldo_tabsukarela_akhir).'</td>'; ?>
 														<?php for($i=0; $i<count($officer_list); $i++) { ?>
-														<?php echo '<td align="right">'.number_format($total_saldo_tabsukarela_per_cabang_akhir[$i]).'</td>' ?>
+														<?php echo '<td align="right"></td>' ?>
 														<?php } ?>
-														<td align="right"><b><?php echo number_format(array_sum($total_saldo_tabsukarela_per_cabang_akhir));
-																						//$total_saldo_tabsukarela); ?></b></td>
 													</tr>
 													<tr>
 														<td></td>
 														<td>Mutasi</td>
+														<?php echo '<td align="right"><b>'."Rp ".number_format($total_saldo_tabsukarela_awal-$total_saldo_tabsukarela_akhir).'</b></td>'; ?>
 														<?php for($i=0; $i<count($officer_list); $i++) { ?>
 														<?php echo '<td align="right"></td>' ?>
 														<?php } ?>
-														<td align="right"><b><?php echo number_format(array_sum($total_saldo_tabsukarela_per_cabang_akhir)-array_sum($total_saldo_tabsukarela_per_cabang_awal))
-																				   //$total_saldo_tabsukarela-$total_saldo_tabsukarela_per_lastmonth ?></b></td>
 													</tr>												
 													<tr>
 														<td><b>5</b></td>
 														<td colspan="4"><b>OUTSTANDING TABUNGAN BERJANGKA</b></td>
-														<td colspan="2"><b><?php echo "Rp ".number_format($total_saldo_tabberjangka_akhir); ?></b></td>
 													</tr>												
 													<tr>
 														<td></td>
 														<td>a. OS Awal</td>
+														<?php echo '<td align="right">'.number_format($total_saldo_tabberjangka_awal).'</td>'; ?>
 														<?php for($i=0; $i<count($officer_list); $i++) { ?>
-														<?php echo '<td align="right">'.number_format($total_saldo_tabberjangka_per_cabang_awal[$i]).'</td>' ?>
+														<?php echo '<td align="right"></td>' ?>
 														<?php } ?>
-														<td align="right"><b><?php echo number_format(array_sum($total_saldo_tabberjangka_per_cabang_awal)); 
-																						//$total_saldo_tabberjangka_per_lastmonth) ?></b></td>
 													</tr>											
 													<tr>
 														<td></td>
 														<td>b. OS Akhir</td>
+														<?php echo '<td align="right">'.number_format($total_saldo_tabberjangka_akhir).'</td>'; ?>
 														<?php for($i=0; $i<count($officer_list); $i++) { ?>
-														<?php echo '<td align="right">'.number_format($total_saldo_tabberjangka_per_cabang_akhir[$i]).'</td>' ?>
+														<?php echo '<td align="right"></td>' ?>
 														<?php } ?>
-														<td align="right"><b><?php echo number_format(array_sum($total_saldo_tabberjangka_per_cabang_akhir));
-																						//$total_saldo_tabberjangka ?></b></td>
 													</tr>
 													<tr>
 														<td></td>
 														<td>Mutasi</td>
+														<?php echo '<td align="right"><b>'."Rp ".number_format($total_saldo_tabberjangka_awal-$total_saldo_tabberjangka_akhir).'</b></td>'; ?>
 														<?php for($i=0; $i<count($officer_list); $i++) { ?>
 														<?php echo '<td align="right"></td>' ?>
 														<?php } ?>
-														<td align="right"><b><?php echo number_format(array_sum($total_saldo_tabberjangka_per_cabang_akhir)-array_sum($total_saldo_tabberjangka_per_cabang_awal));
-																						//$total_saldo_tabberjangka-$total_saldo_tabberjangka_per_lastmonth ?></b></td>
 													</tr>
 													<tr>
 														<td><b>6</b></td>
 														<td colspan="4"><b>OUTSTANDING TABUNGAN WAJIB</b></td>
-														<td colspan="2"><b><?php echo "Rp ".number_format($total_saldo_tabwajib_akhir); ?></b></td>
 													</tr>												
 													<tr>
 														<td></td>
 														<td>a. OS Awal</td>
+														<?php echo '<td align="right">'.number_format($total_saldo_tabwajib_awal).'</td>'; ?>
 														<?php for($i=0; $i<count($officer_list); $i++) { ?>
-														<?php echo '<td align="right">'.number_format($total_saldo_tabwajib_per_cabang_awal[$i]).'</td>' ?>
+														<?php echo '<td align="right"></td>' ?>
 														<?php } ?>
-														<td align="right"><b><?php echo number_format(array_sum($total_saldo_tabwajib_per_cabang_awal));
-																						//$total_saldo_tabwajib_per_lastmonth ?></b></td>
 													</tr>											
 													<tr>
 														<td></td>
 														<td>b. OS Akhir</td>
+														<?php echo '<td align="right">'.number_format($total_saldo_tabwajib_akhir).'</td>'; ?>
 														<?php for($i=0; $i<count($officer_list); $i++) { ?>
-														<?php echo '<td align="right">'.number_format($total_saldo_tabwajib_per_cabang_akhir[$i]).'</td>' ?>
+														<?php echo '<td align="right"></td>' ?>
 														<?php } ?>
-														<td align="right"><b><?php echo number_format(array_sum($total_saldo_tabwajib_per_cabang_akhir));
-																						//$total_saldo_tabwajib); ?></b></td>
 													</tr>
 													<tr>
 														<td></td>
 														<td>Mutasi</td>
+														<?php echo '<td align="right"><b>'."Rp ".number_format($total_saldo_tabwajib_awal-$total_saldo_tabwajib_akhir).'</b></td>'; ?>
 														<?php for($i=0; $i<count($officer_list); $i++) { ?>
 														<?php echo '<td align="right"></td>' ?>
 														<?php } ?>
-														<td align="right"><b><?php echo number_format(array_sum($total_saldo_tabwajib_per_cabang_akhir)-array_sum($total_saldo_tabwajib_per_cabang_awal));
-																						//$total_saldo_tabwajib-$total_saldo_tabwajib_per_lastmonth); ?></b></td>
-													</tr>	
+													</tr>
 													<tr>
 														<td><b>7</b></td>
 														<td colspan="4"><b>RATA-RATA PINJAMAN</b></td>
-														<td colspan="2"><b><?php //echo "Rp ".number_format($total_saldo_tabwajib); ?></b></td>
 													</tr>												
 													<tr>
 														<td></td>
 														<td>a. Rerata OS Awal</td>
-														<?php $akumulasi_rerata_os_awal = 0;?>
+														<?php $rerata_awal = $total_outstanding_pinjaman_awal/$total_all_anggota_awal; ?>
+														<?php echo '<td align="right">'.number_format($rerata_awal).'</td>'; ?>
 														<?php for($i=0; $i<count($officer_list); $i++) { ?>
-														<?php echo '<td align="right">'.number_format($total_outstanding_pinjaman_per_cabang_awal[$i]/$total_anggota_per_cabang_awal[$i]).'</td>' ?>
-														<?php $akumulasi_rerata_os_awal = $akumulasi_rerata_os_awal + ($total_outstanding_pinjaman_per_cabang_awal[$i]/$total_anggota_per_cabang_awal[$i]); ?>
+														<?php echo '<td align="right"></td>' ?>
 														<?php } ?>
-														<td align="right"><b><?php echo //number_format($akumulasi_rerata_os_awal); 
-																						number_format(array_sum($total_outstanding_pinjaman_per_cabang_awal)/array_sum($total_anggota_per_cabang_awal));
-																						//$total_saldo_tabwajib_per_lastmonth ?></b></td>
 													</tr>											
 													<tr>
 														<td></td>
 														<td>b. Rerata OS Akhir</td>
-														<?php $akumulasi_rerata_os_akhir = 0;?>
-														<?php for($i=0; $i<count($officer_list); $i++) { ?>
-														<?php echo '<td align="right">'.number_format($total_outstanding_pinjaman_per_cabang_akhir[$i]/$total_anggota_per_cabang_akhir[$i]).'</td>' ?>
-														<?php $akumulasi_rerata_os_akhir = $akumulasi_rerata_os_akhir + ($total_outstanding_pinjaman_per_cabang_akhir[$i]/$total_anggota_per_cabang_akhir[$i]); ?>
-														<?php } ?>
-														<td align="right"><b><?php echo //number_format($akumulasi_rerata_os_akhir);
-																						number_format(array_sum($total_outstanding_pinjaman_per_cabang_akhir)/array_sum($total_anggota_per_cabang_akhir));
-																						//$total_saldo_tabwajib); ?></b></td>
-													</tr>
-													<tr>
-														<td></td>
-														<td>Mutasi</td>
+														<?php $rerata_akhir = $total_outstanding_pinjaman_akhir/$total_all_anggota_akhir; ?>
+														<?php echo '<td align="right">'.number_format($rerata_akhir).'</td>' ?>
 														<?php for($i=0; $i<count($officer_list); $i++) { ?>
 														<?php echo '<td align="right"></td>' ?>
 														<?php } ?>
-														<td align="right"><b><?php 		$awal = array_sum($total_outstanding_pinjaman_per_cabang_awal)/array_sum($total_anggota_per_cabang_awal);
-																						$akhir = array_sum($total_outstanding_pinjaman_per_cabang_akhir)/array_sum($total_anggota_per_cabang_akhir);
-																						echo //number_format($akumulasi_rerata_os_akhir-$akumulasi_rerata_os_awal);
-																						'Rp '.number_format($akhir-$awal);
-																						//$total_saldo_tabwajib-$total_saldo_tabwajib_per_lastmonth; ?></b></td>
+													</tr>
+													<tr>
+														<td></td>
+														<td>Mutasi Rerata</td>
+														<td align="right"><b><?php echo "Rp ".number_format($rerata_akhir-$rerata_awal); ?></b></td>
+														<?php for($i=0; $i<count($officer_list); $i++) { ?>
+														<?php echo '<td align="right"></td>' ?>
+														<?php } ?>
 													</tr>
 													<tr>
 														<td><b>8</b></td>
 														<td colspan="4"><b>PENCAIRAN</b></td>
-														<td colspan="2"><b><?php //echo "Rp ".number_format($total_saldo_tabwajib); ?></b></td>
 													</tr>												
 													<tr>
 														<td></td>
@@ -295,7 +273,6 @@
 													<tr>
 														<td><b>9</b></td>
 														<td colspan="4"><b>KOLEKTABILITAS PINJAMAN</b></td>
-														<td colspan="2"><b><?php //echo "Rp ".number_format($total_saldo_tabwajib); ?></b></td>
 													</tr>												
 													<tr>
 														<td>NASABAH</td>
@@ -363,32 +340,31 @@
 													</tr>
 													<tr>
 														<td><b>10</b></td>
-														<td colspan="4"><b>RASIO FO</b></td>
-														<td colspan="2"><b><?php //echo "Rp ".number_format($total_saldo_tabwajib); ?></b></td>
+														<td colspan="4"><b>RASIO FO & MAJELIS AT <span style="color: red;"><?php echo strtoupper($branch_name); ?></span></b></td>
 													</tr>												
 													<tr>
 														<td></td>
 														<td>a. Jumlah FO</td>
+														<?php echo '<td align="right">'.$total_all_officer_cabang.'</td>' ?>
 														<?php for($i=0; $i<count($officer_list); $i++) { ?>
-														<?php echo '<td align="right">'.$total_officer_per_cabang[$i].'</td>' ?>
+														<?php echo '<td align="right"></td>' ?>
 														<?php } ?>
-														<td align="right"><b><?php echo array_sum($total_officer_per_cabang); ?></b></td>
 													</tr>											
 													<tr>
 														<td></td>
-														<td>b. Majelis per FO </td>
+														<td>b. Majelis under Cabang</td>
+														<?php echo '<td align="right">'.$total_all_majelis.'</td>' ?>
 														<?php for($i=0; $i<count($officer_list); $i++) { ?>
-														<?php echo '<td align="right">'.round($total_majelis_per_cabang_akhir[$i]/$total_officer_per_cabang[$i]).'</td>' ?>
+														<?php echo '<td align="right"></td>' ?>
 														<?php } ?>
-														<td align="right"><b><?php echo round(array_sum($total_majelis_per_cabang_akhir)/array_sum($total_officer_per_cabang)); ?></b></td>
 													</tr>
 													<tr>
 														<td></td>
 														<td>c. Anggota per FO</td>
+														<?php echo '<td align="right">'.round($total_all_anggota/$total_all_officer_cabang).'</td>' ?>
 														<?php for($i=0; $i<count($officer_list); $i++) { ?>
-														<?php echo '<td align="right">'.round($total_anggota_per_cabang_akhir[$i]/$total_officer_per_cabang[$i]).'</td>' ?>
+														<?php echo '<td align="right"></td>' ?>
 														<?php } ?>
-														<td align="right"><b><?php echo round(array_sum($total_anggota_per_cabang_akhir)/array_sum($total_officer_per_cabang)); ?></b></td>
 													</tr>
 												</table>
 											</div>

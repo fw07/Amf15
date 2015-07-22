@@ -33,9 +33,11 @@ class Operation_branch extends Front_Controller{
 
 				$total_anggota_awal  = $this->operation_model->count_clients_by_branch_by_date($branch, $startdate);
 				$total_anggota_akhir = $this->operation_model->count_clients_by_branch_by_date($branch, $enddate);
+				$total_anggota_all   = $this->operation_model->count_clients_by_branch_by_date($branch, date('Y-m-d',strtotime('now')));
 
 				$total_majelis_awal  = $this->operation_model->count_majelis_by_branch_by_date($branch, $startdate);
 				$total_majelis_akhir = $this->operation_model->count_majelis_by_branch_by_date($branch, $enddate);
+				$total_majelis_all   = $this->operation_model->count_majelis_by_branch_by_date($branch, date('Y-m-d',strtotime('now')));
 
 				$total_cabang  = $this->operation_model->count_all_cabang();
 				$total_officer = $this->operation_model->count_all_officer();
@@ -69,8 +71,10 @@ class Operation_branch extends Front_Controller{
 				$this->template->set('menu_title', 'Review Report')
 					 ->set('total_all_anggota_awal', $total_anggota_awal)
 					 ->set('total_all_anggota_akhir', $total_anggota_akhir)
+					 ->set('total_all_anggota', $total_anggota_all)
 					 ->set('total_all_majelis_awal', $total_majelis_awal)
 					 ->set('total_all_majelis_akhir', $total_majelis_akhir)
+					 ->set('total_all_majelis', $total_majelis_all)
 					 ->set('total_outstanding_pinjaman_awal', $total_outstanding_pinjaman_awal)
 					 ->set('total_outstanding_pinjaman_akhir', $total_outstanding_pinjaman_akhir)
 					 ->set('total_saldo_tabsukarela_awal', $total_saldo_tabsukarela_awal)		
