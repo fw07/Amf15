@@ -1,3 +1,5 @@
+							<?php //var_dump($total_par_minggu1); echo '<br/>'; ?>
+							<?php //var_dump($sum_par_per_cabang_minggu3); ?>
 							<ul class="breadcrumb no-border no-radius b-b b-light pull-in">
 								<li><a href=""><i class="fa fa-home"></i> Home</a></li>
 								<li class="active">Operational Report</li>
@@ -316,72 +318,72 @@
 													</tr>
 													<tr>
 														<td><b>9</b></td>
-														<td colspan="4"><b>KOLEKTABILITAS PINJAMAN</b></td>
+														<td colspan="4"><b>KOLEKTABILITAS PINJAMAN (PAR)</b></td>
 														<td colspan="2"><b><?php //echo "Rp ".number_format($total_saldo_tabwajib); ?></b></td>
 													</tr>												
 													<tr>
 														<td>NASABAH</td>
 														<td>Minggu 1</td>
 														<?php for($i=0; $i<count($list_cabang); $i++) { ?>
-														<?php echo '<td align="right">'.$i.'</td>' ?>
+														<?php echo '<td align="right">'.$total_par_per_cabang_minggu1[$i].'</td>' ?>
 														<?php } ?>
-														<td align="right"><b><?php echo ''; ?></b></td>
+														<td align="right"><b><?php echo $total_par_minggu1; ?></b></td>
 													</tr>	
 													<tr>
 														<td></td>
 														<td>Minggu 2</td>
 														<?php for($i=0; $i<count($list_cabang); $i++) { ?>
-														<?php echo '<td align="right">'.$i.'</td>' ?>
+														<?php echo '<td align="right">'.$total_par_per_cabang_minggu2[$i].'</td>' ?>
 														<?php } ?>
-														<td align="right"><b><?php echo ''; ?></b></td>
+														<td align="right"><b><?php echo $total_par_minggu2; ?></b></td>
 													</tr>	
 													<tr>
 														<td></td>
 														<td>Minggu 3</td>
 														<?php for($i=0; $i<count($list_cabang); $i++) { ?>
-														<?php echo '<td align="right">'.$i.'</td>' ?>
+														<?php echo '<td align="right">'.$total_par_per_cabang_minggu3[$i].'</td>' ?>
 														<?php } ?>
-														<td align="right"><b><?php echo ''; ?></b></td>
+														<td align="right"><b><?php echo $total_par_minggu3; ?></b></td>
 													</tr>
 													<tr>
 														<td></td>
 														<td>Minggu > 3</td>
 														<?php for($i=0; $i<count($list_cabang); $i++) { ?>
-														<?php echo '<td align="right">'.$i.'</td>' ?>
+														<?php echo '<td align="right">'.$total_par_per_cabang_minggu4[$i].'</td>' ?>
 														<?php } ?>
-														<td align="right"><b><?php echo ''; ?></b></td>
+														<td align="right"><b><?php echo $total_par_minggu4; ?></b></td>
 													</tr>									
 													<tr>
 														<td>OUTSTANDING</td>
 														<td>Minggu 1</td>
 														<?php for($i=0; $i<count($list_cabang); $i++) { ?>
-														<?php echo '<td align="right">'.$i.'</td>' ?>
+														<?php echo '<td align="right">'.number_format($sum_par_per_cabang_minggu1[$i]).'</td>' ?>
 														<?php } ?>
-														<td align="right"><b><?php echo ''; ?></b></td>
+														<td align="right"><b><?php echo number_format($sum_par_minggu1); ?></b></td>
 													</tr>
 													<tr>
 														<td></td>
 														<td>Minggu 2</td>
 														<?php for($i=0; $i<count($list_cabang); $i++) { ?>
-														<?php echo '<td align="right">'.$i.'</td>' ?>
+														<?php echo '<td align="right">'.number_format($sum_par_per_cabang_minggu2[$i]).'</td>' ?>
 														<?php } ?>
-														<td align="right"><b><?php echo ''; ?></b></td>
+														<td align="right"><b><?php echo number_format($sum_par_minggu2); ?></b></td>
 													</tr>
 													<tr>
 														<td></td>
 														<td>Minggu 3</td>
 														<?php for($i=0; $i<count($list_cabang); $i++) { ?>
-														<?php echo '<td align="right">'.$i.'</td>' ?>
+														<?php echo '<td align="right">'.number_format($sum_par_per_cabang_minggu3[$i]).'</td>' ?>
 														<?php } ?>
-														<td align="right"><b><?php echo ''; ?></b></td>
+														<td align="right"><b><?php echo number_format($sum_par_minggu3); ?></b></td>
 													</tr>
 													<tr>
 														<td></td>
 														<td>Minggu > 3</td>
 														<?php for($i=0; $i<count($list_cabang); $i++) { ?>
-														<?php echo '<td align="right">'.$i.'</td>' ?>
+														<?php echo '<td align="right">'.number_format($sum_par_per_cabang_minggu4[$i]).'</td>' ?>
 														<?php } ?>
-														<td align="right"><b><?php echo ''; ?></b></td>
+														<td align="right"><b><?php echo number_format($sum_par_minggu4); ?></b></td>
 													</tr>
 													<tr>
 														<td><b>10</b></td>

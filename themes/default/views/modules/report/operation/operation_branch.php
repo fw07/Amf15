@@ -278,7 +278,7 @@
 														<td>NASABAH</td>
 														<td>Minggu 1</td>
 														<?php for($i=0; $i<count($officer_list); $i++) { ?>
-														<?php echo '<td align="right">'.$i.'</td>' ?>
+														<?php echo '<td align="right">'.number_format($total_par_per_cabang_minggu1_per_officer[$i]).'</td>' ?>
 														<?php } ?>
 														<td align="right"><b><?php echo ''; ?></b></td>
 													</tr>	
@@ -286,7 +286,7 @@
 														<td></td>
 														<td>Minggu 2</td>
 														<?php for($i=0; $i<count($officer_list); $i++) { ?>
-														<?php echo '<td align="right">'.$i.'</td>' ?>
+														<?php echo '<td align="right">'.number_format($total_par_per_cabang_minggu2_per_officer[$i]).'</td>' ?>
 														<?php } ?>
 														<td align="right"><b><?php echo ''; ?></b></td>
 													</tr>	
@@ -294,7 +294,7 @@
 														<td></td>
 														<td>Minggu 3</td>
 														<?php for($i=0; $i<count($officer_list); $i++) { ?>
-														<?php echo '<td align="right">'.$i.'</td>' ?>
+														<?php echo '<td align="right">'.number_format($total_par_per_cabang_minggu3_per_officer[$i]).'</td>' ?>
 														<?php } ?>
 														<td align="right"><b><?php echo ''; ?></b></td>
 													</tr>
@@ -302,7 +302,7 @@
 														<td></td>
 														<td>Minggu > 3</td>
 														<?php for($i=0; $i<count($officer_list); $i++) { ?>
-														<?php echo '<td align="right">'.$i.'</td>' ?>
+														<?php echo '<td align="right">'.number_format($total_par_per_cabang_minggu4_per_officer[$i]).'</td>' ?>
 														<?php } ?>
 														<td align="right"><b><?php echo ''; ?></b></td>
 													</tr>									
@@ -310,7 +310,7 @@
 														<td>OUTSTANDING</td>
 														<td>Minggu 1</td>
 														<?php for($i=0; $i<count($officer_list); $i++) { ?>
-														<?php echo '<td align="right">'.$i.'</td>' ?>
+														<?php echo '<td align="right">'.number_format($sum_par_per_cabang_minggu1_per_officer[$i]).'</td>' ?>
 														<?php } ?>
 														<td align="right"><b><?php echo ''; ?></b></td>
 													</tr>
@@ -318,7 +318,7 @@
 														<td></td>
 														<td>Minggu 2</td>
 														<?php for($i=0; $i<count($officer_list); $i++) { ?>
-														<?php echo '<td align="right">'.$i.'</td>' ?>
+														<?php echo '<td align="right">'.number_format($sum_par_per_cabang_minggu2_per_officer[$i]).'</td>' ?>
 														<?php } ?>
 														<td align="right"><b><?php echo ''; ?></b></td>
 													</tr>
@@ -326,7 +326,7 @@
 														<td></td>
 														<td>Minggu 3</td>
 														<?php for($i=0; $i<count($officer_list); $i++) { ?>
-														<?php echo '<td align="right">'.$i.'</td>' ?>
+														<?php echo '<td align="right">'.number_format($sum_par_per_cabang_minggu3_per_officer[$i]).'</td>' ?>
 														<?php } ?>
 														<td align="right"><b><?php echo ''; ?></b></td>
 													</tr>
@@ -334,7 +334,7 @@
 														<td></td>
 														<td>Minggu > 3</td>
 														<?php for($i=0; $i<count($officer_list); $i++) { ?>
-														<?php echo '<td align="right">'.$i.'</td>' ?>
+														<?php echo '<td align="right">'.number_format($sum_par_per_cabang_minggu4_per_officer[$i]).'</td>' ?>
 														<?php } ?>
 														<td align="right"><b><?php echo ''; ?></b></td>
 													</tr>

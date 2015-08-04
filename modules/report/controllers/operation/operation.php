@@ -55,6 +55,16 @@ class Operation extends Front_Controller{
 
 				$list_cabang   = $this->operation_model->list_cabang();
 
+				$total_par_minggu1 = $this->operation_model->count_par_per_branch_per_week('0', $startdate, $enddate, '1');
+				$total_par_minggu2 = $this->operation_model->count_par_per_branch_per_week('0', $startdate, $enddate, '2');
+				$total_par_minggu3 = $this->operation_model->count_par_per_branch_per_week('0', $startdate, $enddate, '3');
+				$total_par_minggu4 = $this->operation_model->count_par_per_branch_per_week('0', $startdate, $enddate, '4');
+
+				$sum_par_minggu1 = $this->operation_model->sum_par_per_branch_per_week('0', $startdate, $enddate, '1');
+				$sum_par_minggu2 = $this->operation_model->sum_par_per_branch_per_week('0', $startdate, $enddate, '2');
+				$sum_par_minggu3 = $this->operation_model->sum_par_per_branch_per_week('0', $startdate, $enddate, '3');
+				$sum_par_minggu4 = $this->operation_model->sum_par_per_branch_per_week('0', $startdate, $enddate, '4');
+
 				for($i=0; $i<count($list_cabang); $i++){
 					$total_anggota_per_cabang_awal[$i] = $this->operation_model->count_clients_by_branch_by_date($list_cabang[$i]['branch_id'], $startdate);
 					$total_anggota_per_cabang_akhir[$i] = $this->operation_model->count_clients_by_branch_by_date($list_cabang[$i]['branch_id'], $enddate);
@@ -76,6 +86,15 @@ class Operation extends Front_Controller{
 					
 					$total_officer_per_cabang[$i] = $this->operation_model->count_all_officer_by_branch($list_cabang[$i]['branch_id']);
 
+					$total_par_per_cabang_minggu1[$i] = $this->operation_model->count_par_per_branch_per_week($list_cabang[$i]['branch_id'], $startdate, $enddate, '1');
+					$total_par_per_cabang_minggu2[$i] = $this->operation_model->count_par_per_branch_per_week($list_cabang[$i]['branch_id'], $startdate, $enddate, '2');
+					$total_par_per_cabang_minggu3[$i] = $this->operation_model->count_par_per_branch_per_week($list_cabang[$i]['branch_id'], $startdate, $enddate, '3');
+					$total_par_per_cabang_minggu4[$i] = $this->operation_model->count_par_per_branch_per_week($list_cabang[$i]['branch_id'], $startdate, $enddate, '4');
+
+					$sum_par_per_cabang_minggu1[$i] = $this->operation_model->sum_par_per_branch_per_week($list_cabang[$i]['branch_id'], $startdate, $enddate, '1');
+					$sum_par_per_cabang_minggu2[$i] = $this->operation_model->sum_par_per_branch_per_week($list_cabang[$i]['branch_id'], $startdate, $enddate, '2');
+					$sum_par_per_cabang_minggu3[$i] = $this->operation_model->sum_par_per_branch_per_week($list_cabang[$i]['branch_id'], $startdate, $enddate, '3');
+					$sum_par_per_cabang_minggu4[$i] = $this->operation_model->sum_par_per_branch_per_week($list_cabang[$i]['branch_id'], $startdate, $enddate, '4');
 				}
 				
 				$this->template	->set('menu_title', 'Review Report')
@@ -93,6 +112,23 @@ class Operation extends Front_Controller{
 								->set('total_outstanding_pinjaman_akhir', $total_outstanding_pinjaman_akhir)
 								->set('total_outstanding_pinjaman_per_cabang_awal', $total_outstanding_pinjaman_per_cabang_awal)	
 								->set('total_outstanding_pinjaman_per_cabang_akhir', $total_outstanding_pinjaman_per_cabang_akhir)
+				//				->set(PAR)
+								->set('total_par_per_cabang_minggu1', $total_par_per_cabang_minggu1)
+								->set('total_par_per_cabang_minggu2', $total_par_per_cabang_minggu2)
+								->set('total_par_per_cabang_minggu3', $total_par_per_cabang_minggu3)
+								->set('total_par_per_cabang_minggu4', $total_par_per_cabang_minggu4)
+								->set('total_par_minggu1', $total_par_minggu1)
+								->set('total_par_minggu2', $total_par_minggu2)
+								->set('total_par_minggu3', $total_par_minggu3)
+								->set('total_par_minggu4', $total_par_minggu4)
+								->set('sum_par_per_cabang_minggu1', $sum_par_per_cabang_minggu1)
+								->set('sum_par_per_cabang_minggu2', $sum_par_per_cabang_minggu2)
+								->set('sum_par_per_cabang_minggu3', $sum_par_per_cabang_minggu3)
+								->set('sum_par_per_cabang_minggu4', $sum_par_per_cabang_minggu4)
+								->set('sum_par_minggu1', $sum_par_minggu1)
+								->set('sum_par_minggu2', $sum_par_minggu2)
+								->set('sum_par_minggu3', $sum_par_minggu3)
+								->set('sum_par_minggu4', $sum_par_minggu4)
 				//				->set(tabsukarela)
 								->set('total_saldo_tabsukarela_awal', $total_saldo_tabsukarela_awal)		
 								->set('total_saldo_tabsukarela_akhir', $total_saldo_tabsukarela_akhir)

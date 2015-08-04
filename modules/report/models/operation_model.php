@@ -178,6 +178,148 @@ class operation_model extends MY_Model {
 		//			->row()->num_group;
 	}
 
+	public function count_par_per_branch_per_week($branch='0', $startday='2010-01-01', $endday='', $par_at='')
+	{
+		if($branch=='0')
+			$wherebranch = 'tbl_clients.client_branch BETWEEN 1 AND 6';
+		else
+			$wherebranch = 'tbl_clients.client_branch = '.$branch;
+		if($endday=='')
+		{
+			$endday = date('Y-m-d', strtotime('now'));
+			$wheredate = "DATE(tbl_risk.risk_date) >= '".$startday."' AND DATE(tbl_risk.risk_date) <= '".$endday."'";
+		}
+		else
+		{
+			$wheredate = "DATE(tbl_risk.risk_date) >= '".$startday."' AND DATE(tbl_risk.risk_date) <= '".$endday."'";
+		}
+		if($par_at=='')
+			$wherepar = 'tbl_pembiayaan.data_par >= 1';
+		elseif ($par_at=='4')
+			$wherepar = 'tbl_pembiayaan.data_par >= 4';
+		else
+			$wherepar = 'tbl_pembiayaan.data_par = '.$par_at;
+
+		return $this->db->select("count(tbl_pembiayaan.data_client) as client_par")
+						->from('tbl_pembiayaan')
+						->join('tbl_clients', 'tbl_clients.client_id = tbl_pembiayaan.data_client', 'left')
+						->join('tbl_risk', 'tbl_risk.risk_pembiayaan = tbl_pembiayaan.data_id', 'left')
+						->where($wherebranch)
+						->where($wheredate)
+						->where($wherepar)
+						->where('tbl_pembiayaan.deleted','0')
+						->get()
+						->row()
+						->client_par;
+	}
+
+	public function sum_par_per_branch_per_week($branch='0', $startday='2010-01-01', $endday='', $par_at='')
+	{
+		if($branch=='0')
+			$wherebranch = 'tbl_clients.client_branch BETWEEN 1 AND 6';
+		else
+			$wherebranch = 'tbl_clients.client_branch = '.$branch;
+		if($endday=='')
+		{
+			$endday = date('Y-m-d', strtotime('now'));
+			$wheredate = "DATE(tbl_risk.risk_date) >= '".$startday."' AND DATE(tbl_risk.risk_date) <= '".$endday."'";
+		}
+		else
+		{
+			$wheredate = "DATE(tbl_risk.risk_date) >= '".$startday."' AND DATE(tbl_risk.risk_date) <= '".$endday."'";
+		}
+		if($par_at=='')
+			$wherepar = 'tbl_pembiayaan.data_par >= 1';
+		elseif ($par_at=='4')
+			$wherepar = 'tbl_pembiayaan.data_par = 4 ';
+		else
+			$wherepar = 'tbl_pembiayaan.data_par = '.$par_at;
+
+		return $this->db->select("sum(tbl_pembiayaan.data_totalangsuran * tbl_pembiayaan.data_par) as acc_risk_nominal")
+						->from('tbl_pembiayaan')
+						->join('tbl_clients', 'tbl_clients.client_id = tbl_pembiayaan.data_client', 'left')
+						->join('tbl_risk', 'tbl_risk.risk_pembiayaan = tbl_pembiayaan.data_id', 'left')
+						->where($wherebranch)
+						->where($wheredate)
+						->where($wherepar)
+						->where('tbl_pembiayaan.deleted','0')
+						->get()
+						->row()
+						->acc_risk_nominal;
+	}
+
+	public function count_par_per_branch_per_week_per_officer($branch='0', $startday='2010-01-01', $endday='', $par_at='', $officer_id)
+	{
+		if($branch=='0')
+			$wherebranch = 'tbl_clients.client_branch BETWEEN 1 AND 6';
+		else
+			$wherebranch = 'tbl_clients.client_branch = '.$branch;
+		if($endday=='')
+		{
+			$endday = date('Y-m-d', strtotime('now'));
+			$wheredate = "DATE(tbl_risk.risk_date) >= '".$startday."' AND DATE(tbl_risk.risk_date) <= '".$endday."'";
+		}
+		else
+		{
+			$wheredate = "DATE(tbl_risk.risk_date) >= '".$startday."' AND DATE(tbl_risk.risk_date) <= '".$endday."'";
+		}
+		if($par_at=='')
+			$wherepar = 'tbl_pembiayaan.data_par >= 1';
+		elseif ($par_at=='4')
+			$wherepar = 'tbl_pembiayaan.data_par >= 4';
+		else
+			$wherepar = 'tbl_pembiayaan.data_par = '.$par_at;
+
+		return $this->db->select("count(tbl_pembiayaan.data_client) as client_par")
+						->from('tbl_pembiayaan')
+						->join('tbl_clients', 'tbl_clients.client_id = tbl_pembiayaan.data_client', 'left')
+						->join('tbl_risk', 'tbl_risk.risk_pembiayaan = tbl_pembiayaan.data_id', 'left')
+						->join('tbl_officer', 'tbl_officer.officer_id = tbl_clients.client_officer', 'left')
+						->where($wherebranch)
+		//				->where($wheredate)
+						->where($wherepar)
+						->where('tbl_pembiayaan.deleted','0')
+						->get()
+						->row()
+						->client_par;
+	}
+
+	public function sum_par_per_branch_per_week_per_officer($branch='0', $startday='2010-01-01', $endday='', $par_at='', $officer_id)
+	{
+		if($branch=='0')
+			$wherebranch = 'tbl_clients.client_branch BETWEEN 1 AND 6';
+		else
+			$wherebranch = 'tbl_clients.client_branch = '.$branch;
+		if($endday=='')
+		{
+			$endday = date('Y-m-d', strtotime('now'));
+			$wheredate = "DATE(tbl_risk.risk_date) >= '".$startday."' AND DATE(tbl_risk.risk_date) <= '".$endday."'";
+		}
+		else
+		{
+			$wheredate = "DATE(tbl_risk.risk_date) >= '".$startday."' AND DATE(tbl_risk.risk_date) <= '".$endday."'";
+		}
+		if($par_at=='')
+			$wherepar = 'tbl_pembiayaan.data_par >= 1';
+		elseif ($par_at=='4')
+			$wherepar = 'tbl_pembiayaan.data_par = 4 ';
+		else
+			$wherepar = 'tbl_pembiayaan.data_par = '.$par_at;
+
+		return $this->db->select("sum(tbl_pembiayaan.data_totalangsuran * tbl_pembiayaan.data_par) as acc_risk_nominal")
+						->from('tbl_pembiayaan')
+						->join('tbl_clients', 'tbl_clients.client_id = tbl_pembiayaan.data_client', 'left')
+						->join('tbl_risk', 'tbl_risk.risk_pembiayaan = tbl_pembiayaan.data_id', 'left')
+						->join('tbl_officer', 'tbl_officer.officer_id = tbl_clients.client_officer', 'left')
+						->where($wherebranch)
+		//				->where($wheredate)
+						->where($wherepar)
+						->where('tbl_pembiayaan.deleted','0')
+						->get()
+						->row()
+						->acc_risk_nominal;
+	}
+
 	/*=======================================================================================================*/
 	public function sum_all_outstanding_pinjaman_by_branch_by_date($branch='0', $pivotday='')
 	{
