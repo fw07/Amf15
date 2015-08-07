@@ -77,16 +77,18 @@ class Operation_branch extends Front_Controller{
 					$officer_list[$n]['no_majelis_awal'] = $this->operation_model->count_majelis_per_officer_per_branch($branch, $officer_list[$n]['officer_id'], $startdate);
 					$officer_list[$n]['no_clients_akhir'] = $this->operation_model->count_clients_per_officer_per_branch($branch, $officer_list[$n]['officer_id'], $enddate);
 					$officer_list[$n]['no_majelis_akhir'] = $this->operation_model->count_majelis_per_officer_per_branch($branch, $officer_list[$n]['officer_id'], $enddate);
-					//echo $officer_list[$n]['no_clients'].'-'.$officer_list[$n]['no_majelis'].'<br/>';
-					$total_par_per_cabang_minggu1_per_officer[$i] = $this->operation_model->count_par_per_branch_per_week_per_officer($branch, $startdate, $enddate, '1', $officer_list[$n]['officer_id']);
-					$total_par_per_cabang_minggu2_per_officer[$i] = $this->operation_model->count_par_per_branch_per_week_per_officer($branch, $startdate, $enddate, '2', $officer_list[$n]['officer_id']);
-					$total_par_per_cabang_minggu3_per_officer[$i] = $this->operation_model->count_par_per_branch_per_week_per_officer($branch, $startdate, $enddate, '3', $officer_list[$n]['officer_id']);
-					$total_par_per_cabang_minggu4_per_officer[$i] = $this->operation_model->count_par_per_branch_per_week_per_officer($branch, $startdate, $enddate, '4', $officer_list[$n]['officer_id']);
+					//echo $officer_list[$n]['no_clients_awal'].'-'.$officer_list[$n]['no_majelis_awal'].'<br/>';
+					//echo $branch.'b-'.$startdate.'s-'.$enddate.'e-'.'1'.'w-'.$officer_list[$n]['officer_id'].'o';
+					//echo "<br/>";
+					$total_par_per_cabang_minggu1_per_officer[$n] = $this->operation_model->count_par_per_branch_per_week_per_officer($branch, $startdate, $enddate, '1', $officer_list[$n]['officer_id']);
+					$total_par_per_cabang_minggu2_per_officer[$n] = $this->operation_model->count_par_per_branch_per_week_per_officer($branch, $startdate, $enddate, '2', $officer_list[$n]['officer_id']);
+					$total_par_per_cabang_minggu3_per_officer[$n] = $this->operation_model->count_par_per_branch_per_week_per_officer($branch, $startdate, $enddate, '3', $officer_list[$n]['officer_id']);
+					$total_par_per_cabang_minggu4_per_officer[$n] = $this->operation_model->count_par_per_branch_per_week_per_officer($branch, $startdate, $enddate, '4', $officer_list[$n]['officer_id']);
 
-					$sum_par_per_cabang_minggu1_per_officer[$i] = $this->operation_model->sum_par_per_branch_per_week_per_officer($branch, $startdate, $enddate, '1', $officer_list[$n]['officer_id']);
-					$sum_par_per_cabang_minggu2_per_officer[$i] = $this->operation_model->sum_par_per_branch_per_week_per_officer($branch, $startdate, $enddate, '2', $officer_list[$n]['officer_id']);
-					$sum_par_per_cabang_minggu3_per_officer[$i] = $this->operation_model->sum_par_per_branch_per_week_per_officer($branch, $startdate, $enddate, '3', $officer_list[$n]['officer_id']);
-					$sum_par_per_cabang_minggu4_per_officer[$i] = $this->operation_model->sum_par_per_branch_per_week_per_officer($branch, $startdate, $enddate, '4', $officer_list[$n]['officer_id']);
+					$sum_par_per_cabang_minggu1_per_officer[$n] = $this->operation_model->sum_par_per_branch_per_week_per_officer($branch, $startdate, $enddate, '1', $officer_list[$n]['officer_id']);
+					$sum_par_per_cabang_minggu2_per_officer[$n] = $this->operation_model->sum_par_per_branch_per_week_per_officer($branch, $startdate, $enddate, '2', $officer_list[$n]['officer_id']);
+					$sum_par_per_cabang_minggu3_per_officer[$n] = $this->operation_model->sum_par_per_branch_per_week_per_officer($branch, $startdate, $enddate, '3', $officer_list[$n]['officer_id']);
+					$sum_par_per_cabang_minggu4_per_officer[$n] = $this->operation_model->sum_par_per_branch_per_week_per_officer($branch, $startdate, $enddate, '4', $officer_list[$n]['officer_id']);
 				}
 				
 				$this->template->set('menu_title', 'Review Report')

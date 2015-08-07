@@ -1,4 +1,5 @@
 
+							<?php //var_dump($total_par_per_cabang_minggu1_per_officer); ?>
 							<ul class="breadcrumb no-border no-radius b-b b-light pull-in">
 								<li><a href=""><i class="fa fa-home"></i> Home</a></li>
 								<li class="active">Operational Report</li>
@@ -151,7 +152,7 @@
 													<tr>
 														<td></td>
 														<td>Mutasi</td>
-														<?php echo '<td align="right"><b>'."Rp ".number_format($total_saldo_tabsukarela_awal-$total_saldo_tabsukarela_akhir).'</b></td>'; ?>
+														<?php echo '<td align="right"><b>'."Rp ".number_format($total_saldo_tabsukarela_akhir-$total_saldo_tabsukarela_awal).'</b></td>'; ?>
 														<?php for($i=0; $i<count($officer_list); $i++) { ?>
 														<?php echo '<td align="right"></td>' ?>
 														<?php } ?>
@@ -179,7 +180,7 @@
 													<tr>
 														<td></td>
 														<td>Mutasi</td>
-														<?php echo '<td align="right"><b>'."Rp ".number_format($total_saldo_tabberjangka_awal-$total_saldo_tabberjangka_akhir).'</b></td>'; ?>
+														<?php echo '<td align="right"><b>'."Rp ".number_format($total_saldo_tabberjangka_akhir-$total_saldo_tabberjangka_awal).'</b></td>'; ?>
 														<?php for($i=0; $i<count($officer_list); $i++) { ?>
 														<?php echo '<td align="right"></td>' ?>
 														<?php } ?>
@@ -207,7 +208,7 @@
 													<tr>
 														<td></td>
 														<td>Mutasi</td>
-														<?php echo '<td align="right"><b>'."Rp ".number_format($total_saldo_tabwajib_awal-$total_saldo_tabwajib_akhir).'</b></td>'; ?>
+														<?php echo '<td align="right"><b>'."Rp ".number_format($total_saldo_tabwajib_akhir-$total_saldo_tabwajib_awal).'</b></td>'; ?>
 														<?php for($i=0; $i<count($officer_list); $i++) { ?>
 														<?php echo '<td align="right"></td>' ?>
 														<?php } ?>
@@ -272,7 +273,7 @@
 													</tr>
 													<tr>
 														<td><b>9</b></td>
-														<td colspan="4"><b>KOLEKTABILITAS PINJAMAN</b></td>
+														<td colspan="4"><b>KOLEKTABILITAS PINJAMAN (PAR)</b></td>
 													</tr>												
 													<tr>
 														<td>NASABAH</td>
@@ -280,7 +281,7 @@
 														<?php for($i=0; $i<count($officer_list); $i++) { ?>
 														<?php echo '<td align="right">'.number_format($total_par_per_cabang_minggu1_per_officer[$i]).'</td>' ?>
 														<?php } ?>
-														<td align="right"><b><?php echo ''; ?></b></td>
+														<td align="right"><b><?php echo array_sum($total_par_per_cabang_minggu1_per_officer); ?></b></td>
 													</tr>	
 													<tr>
 														<td></td>
@@ -288,7 +289,7 @@
 														<?php for($i=0; $i<count($officer_list); $i++) { ?>
 														<?php echo '<td align="right">'.number_format($total_par_per_cabang_minggu2_per_officer[$i]).'</td>' ?>
 														<?php } ?>
-														<td align="right"><b><?php echo ''; ?></b></td>
+														<td align="right"><b><?php echo array_sum($total_par_per_cabang_minggu2_per_officer); ?></b></td>
 													</tr>	
 													<tr>
 														<td></td>
@@ -296,7 +297,7 @@
 														<?php for($i=0; $i<count($officer_list); $i++) { ?>
 														<?php echo '<td align="right">'.number_format($total_par_per_cabang_minggu3_per_officer[$i]).'</td>' ?>
 														<?php } ?>
-														<td align="right"><b><?php echo ''; ?></b></td>
+														<td align="right"><b><?php echo array_sum($total_par_per_cabang_minggu3_per_officer); ?></b></td>
 													</tr>
 													<tr>
 														<td></td>
@@ -304,7 +305,7 @@
 														<?php for($i=0; $i<count($officer_list); $i++) { ?>
 														<?php echo '<td align="right">'.number_format($total_par_per_cabang_minggu4_per_officer[$i]).'</td>' ?>
 														<?php } ?>
-														<td align="right"><b><?php echo ''; ?></b></td>
+														<td align="right"><b><?php echo array_sum($total_par_per_cabang_minggu4_per_officer); ?></b></td>
 													</tr>									
 													<tr>
 														<td>OUTSTANDING</td>
@@ -312,7 +313,7 @@
 														<?php for($i=0; $i<count($officer_list); $i++) { ?>
 														<?php echo '<td align="right">'.number_format($sum_par_per_cabang_minggu1_per_officer[$i]).'</td>' ?>
 														<?php } ?>
-														<td align="right"><b><?php echo ''; ?></b></td>
+														<td align="right"><b><?php echo number_format(array_sum($sum_par_per_cabang_minggu1_per_officer)); ?></b></td>
 													</tr>
 													<tr>
 														<td></td>
@@ -320,7 +321,7 @@
 														<?php for($i=0; $i<count($officer_list); $i++) { ?>
 														<?php echo '<td align="right">'.number_format($sum_par_per_cabang_minggu2_per_officer[$i]).'</td>' ?>
 														<?php } ?>
-														<td align="right"><b><?php echo ''; ?></b></td>
+														<td align="right"><b><?php echo number_format(array_sum($sum_par_per_cabang_minggu2_per_officer)); ?></b></td>
 													</tr>
 													<tr>
 														<td></td>
@@ -328,7 +329,7 @@
 														<?php for($i=0; $i<count($officer_list); $i++) { ?>
 														<?php echo '<td align="right">'.number_format($sum_par_per_cabang_minggu3_per_officer[$i]).'</td>' ?>
 														<?php } ?>
-														<td align="right"><b><?php echo ''; ?></b></td>
+														<td align="right"><b><?php echo number_format(array_sum($sum_par_per_cabang_minggu3_per_officer); ?></b></td>
 													</tr>
 													<tr>
 														<td></td>
@@ -336,7 +337,7 @@
 														<?php for($i=0; $i<count($officer_list); $i++) { ?>
 														<?php echo '<td align="right">'.number_format($sum_par_per_cabang_minggu4_per_officer[$i]).'</td>' ?>
 														<?php } ?>
-														<td align="right"><b><?php echo ''; ?></b></td>
+														<td align="right"><b><?php echo number_format(array_sum($sum_par_per_cabang_minggu4_per_officer)); ?></b></td>
 													</tr>
 													<tr>
 														<td><b>10</b></td>
