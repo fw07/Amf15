@@ -8,12 +8,20 @@ class Operation extends Front_Controller{
 	}
 
 	public function index(){
+		//SAMPLE USAGE ACCESS CONTROL
+		$mod    	= $this->router->fetch_module(); 
+		$cont       = $this->router->fetch_class();
+		$func       = $this->router->fetch_method();
+		$user_level = $this->session->userdata('user_level');//1 Admin, 2 Manager, etc.
+
+		$access     = $this->access_control->check_access($user_level, $mod, $cont, $func);
+		//echo '$this->access_control->check_access('.$mod.', '.$cont.', '.$func.', '.$user_level.')';
+		//echo 'access='.$access->access_id.$access->access_userbinding.$access->access_privilege.$access->access_level_max;
+		//echo '<br/>'; var_dump($access);
+
 		if($this->session->userdata('logged_in'))
 		{
-			//Cek User Login Branch
-			$user_level = $this->session->userdata('user_level');
-			//Accessible only from Admin
-			if($user_level=='1'){
+			if(count($access)){
 
 				if($this->input->post('filter') == '1'){
 					$branch = $this->input->post('branch');
@@ -97,6 +105,19 @@ class Operation extends Front_Controller{
 					$sum_par_per_cabang_minggu4[$i] = $this->operation_model->sum_par_per_branch_per_week($list_cabang[$i]['branch_id'], $startdate, $enddate, '4');
 				}
 				
+				//SAMPLE USAGE ACTIVITY LOG
+				$log_data = array(
+
+						'activity_userid' 	    => $this->session->userdata['user_id'],
+						'activity_userbranch'   => $this->session->userdata['user_branch'],
+						'activity_module' 		=> $this->router->fetch_module(),
+						'activity_controller'   => $this->router->fetch_class(),
+						'activity_method'       => $this->router->fetch_method(),
+						'activity_data'         => 'log_data',
+						'activity_remarks'      => 'log_remarks'
+				);
+				$log = $this->access_control->log_activity($log_data);
+
 				$this->template	->set('menu_title', 'Review Report')
 								->set('total_all_anggota_awal', $total_anggota_awal)
 								->set('total_all_anggota_akhir', $total_anggota_akhir)
@@ -151,6 +172,7 @@ class Operation extends Front_Controller{
 								->set('list_cabang', $list_cabang)
 								->set('date_awal', date("d F Y", strtotime($startdate))) 
 								->set('date_akhir', date("d F Y", strtotime($enddate)))
+								->set('buffer', $buffer)
 								->build('operation/operation');
 								//->build('review/review');
 			}else{

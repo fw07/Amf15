@@ -349,6 +349,8 @@ class Clients extends Front_Controller{
 		//GET GROUP LIST
 		$group = $this->group_model->get_all();
 		$sector = $this->sector_model->get_all()->result();
+
+		$investor = $this->clients_model->get_all_investors_list();
 		
 		if($this->save_pembiayaan()){
 			$this->session->set_flashdata('message', 'success|Data pembiayaan telah diupdate');
@@ -359,6 +361,7 @@ class Clients extends Front_Controller{
 						->set('client', $client)
 						->set('group', $group)
 						->set('officer', $officer)
+						->set('investor', $investor)
 						->set('data_client', $client_id)
 						->set('data', $data)						
 						->set('menu_client', 'active')				
@@ -644,6 +647,7 @@ class Clients extends Front_Controller{
 					'data_pengeluaran_angsuranlain'		=> $this->input->post('data_pengeluaran_angsuranlain'),
 					'data_pengeluaran_total'			=> $this->input->post('data_pengeluaran_total'),
 					'data_savingpower'					=> $this->input->post('data_savingpower'),
+					'data_sumber_pembiayaan'			=> $this->input->post('client_pembiayaan_sumber')
 					
 			);
 			

@@ -46,8 +46,9 @@ $user_level = $this->session->userdata('user_level');
 							<th class="text-center">Majelis</th>
 							<?php if($this->session->userdata('user_branch') == 0){ ?><th class="text-center">Cabang</th><?php } ?>
 							<th class="text-center">Tanggal Registrasi</th>
-							<th class="text-center" width="50px">Pembiayaan</th>
-							<th class="text-center" width="50px">Status</th>
+							<th class="text-center" width="30px">Pembiayaan</th>
+							<th class="text-center" width="30px">Status</th>
+							<th class="text-center" width="20px">Sumber</th>
 							<th width="100px" class="text-center">Manage</th>
 						  </tr>                  
 						</thead> 
@@ -64,6 +65,7 @@ $user_level = $this->session->userdata('user_level');
 								} 
 						?>
 						<?php foreach($clients as $c):  ?>
+							<?php //var_dump($c) ?>
 							<tr>     
 								<td align="center"><?php echo $no; ?></td>					              
 								<td><?php echo $c->client_account; ?></td>
@@ -73,6 +75,7 @@ $user_level = $this->session->userdata('user_level');
 								<td class="text-center"><?php echo $c->client_reg_date; ?></td>
 								<td class="text-center"><span class="label label-success"><?php echo $c->client_pembiayaan; ?></span></td>
 								<td class="text-center"><?php if($c->client_status == "1"){ echo "Aktif";}else{ echo "Keluar"; }; ?></td>
+								<td class="text-center"><?php echo $c->lender_name; ?></td>
 								<td class="text-center">
 									<a href="<?php echo site_url()."/clients/summary/".$c->client_id; ?>" title="View"><i class="fa fa-search"></i></a> 
 									<?php if($user_level==1 OR $user_level==2 OR $user_level==3){ ?>

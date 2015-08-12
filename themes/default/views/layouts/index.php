@@ -158,6 +158,8 @@ $user_level = $this->session->userdata('user_level');
 											<ul class="nav lt">
 												<li><a href="<?php echo site_url(); ?>/lenders"> <i class="fa fa-angle-right"></i>  <span>Data Investor</span></a></li>
 												<li><a href="<?php echo site_url(); ?>/lenders/registration"> <i class="fa fa-angle-right"></i>  <span>Registrasi Investor</span></a></li>
+												<li><a href="<?php echo site_url(); ?>/lenders/investment"> <i class="fa fa-angle-right"></i>  <span>Data Investasi</span></a></li>
+												<li><a href="<?php echo site_url(); ?>/lenders/investment_recap"> <i class="fa fa-angle-right"></i>  <span>Rekap Investasi</span></a></li>
 											</ul>
 										</li>
 										<!--<li class="<?php echo $menu_office; ?>">
@@ -217,6 +219,7 @@ $user_level = $this->session->userdata('user_level');
 												<li><a href="<?php echo site_url(); ?>/report/finance"> <i class="fa fa-angle-right"></i>  <span>Finance</span></a></li>
 												<li><a href="<?php echo site_url(); ?>/report/audit"> <i class="fa fa-angle-right"></i>  <span>Audit</span></a></li>
 												<li><a href="<?php echo site_url(); ?>/report/operation"> <i class="fa fa-angle-right"></i>  <span>Operation</span></a></li>
+
 											</ul>
 										</li>
 										<?php } ?>

@@ -235,7 +235,7 @@ class operation_model extends MY_Model {
 		else
 			$wherepar = 'tbl_pembiayaan.data_par = '.$par_at;
 
-		return $this->db->select("sum(tbl_pembiayaan.data_totalangsuran * tbl_pembiayaan.data_par) as acc_risk_nominal")
+		return $this->db->select("sum(tbl_pembiayaan.data_angsuranpokok * tbl_pembiayaan.data_par) as acc_risk_nominal")
 						->from('tbl_pembiayaan')
 						->join('tbl_clients', 'tbl_clients.client_id = tbl_pembiayaan.data_client', 'left')
 						->join('tbl_risk', 'tbl_risk.risk_pembiayaan = tbl_pembiayaan.data_id', 'left')
@@ -318,7 +318,7 @@ class operation_model extends MY_Model {
 		$whereofficer = 'tbl_officer.officer_id = '.$officer_id;
 
 		//$this->db->_compile_select(); 
-		return $this->db->select("sum(tbl_pembiayaan.data_totalangsuran * tbl_pembiayaan.data_par) as acc_risk_nominal")
+		return $this->db->select("sum(tbl_pembiayaan.data_angsuranpokok * tbl_pembiayaan.data_par) as acc_risk_nominal")
 						->from('tbl_pembiayaan')
 						->join('tbl_clients', 'tbl_clients.client_id = tbl_pembiayaan.data_client', 'left')
 						->join('tbl_risk', 'tbl_risk.risk_pembiayaan = tbl_pembiayaan.data_id', 'left')

@@ -30,6 +30,17 @@ class lenders_model extends MY_Model {
 		return $this->db->get($this->table);
 	}
 
+	public function get_all_active_lenders($search='', $key='')
+	{
+		return $this->db->select('*')
+						->from($this->table)
+						->where('deleted','0')
+		//				->where($search, $key)
+						->order_by('lender_id','ASC')
+						->get()
+						->result();
+	}
+
 	public function get_all_lenders_attributes()
 	{
 		return $this->db->select('lender_id', 'lender_code', 'lender_name')

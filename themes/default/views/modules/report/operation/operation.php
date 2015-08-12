@@ -1,5 +1,5 @@
 							<?php //var_dump($total_par_minggu1); echo '<br/>'; ?>
-							<?php //var_dump($sum_par_per_cabang_minggu3); ?>
+							<?php //echo 'buffer='.$this->router->fetch_module().'-'.$this->router->fetch_class().'-'.$this->router->fetch_method(); ?>
 							<ul class="breadcrumb no-border no-radius b-b b-light pull-in">
 								<li><a href=""><i class="fa fa-home"></i> Home</a></li>
 								<li class="active">Operational Report</li>

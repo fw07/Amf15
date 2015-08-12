@@ -42,12 +42,13 @@
 							<?php if($this->session->userdata('user_branch') == 0){ ?><th class="text-center">Cabang</th><?php } ?>
 							<th class="text-left">Majelis</th>
 							<th class="text-right">Plafond</th>
-							<th class="text-center">Ke</th>
-							<th class="text-right">Sisa Angsuran</th>
-							<th class="text-center">PAR</th>
-							<th class="text-center">TR</th>
+							<th class="text-right">Sumber</th>
+							<!--<th class="text-center">Ke</th>-->
+							<!--<th class="text-right">Sisa Angsuran</th>-->
+							<!--<th class="text-center">PAR</th>-->
+							<!--<th class="text-center">TR</th>-->
 							<!--<th class="text-center">Tanggal<br/>Pencairan</th>-->
-							<th class="text-center">Tanggal<br/>Jatuh Tempo</th>
+							<!--<th class="text-center">Tanggal<br/>Jatuh Tempo</th>-->
 							<th class="text-left">Sektor</th>
 							<th class="text-center">Akad</th>
 							<th width="50px" class="text-center">View</th>
@@ -73,12 +74,13 @@
 								<?php if($this->session->userdata('user_branch') == 0){ ?><td class="text-center"><?php echo $c->branch_name; ?></td><?php } ?>
 								<td class="text-left"><?php echo $c->group_name; ?></td>
 								<td class="text-right"><?php echo number_format($c->data_plafond + $c->data_margin); ?></td>
-								<td class="text-center"><?php echo $c->data_angsuranke; ?></td>
-								<td class="text-right"><?php echo number_format($c->data_sisaangsuran); ?></td>
-								<td class="text-center"><?php echo $c->data_par; ?></td>
-								<td class="text-center"><?php echo $c->data_tr; ?></td>
+								<td class="text-right"><?php echo $c->data_sumber_pembiayaan; ?></td>
+								<!--<td class="text-center"><?php echo $c->data_angsuranke; ?></td>-->
+								<!--<td class="text-right"><?php echo number_format($c->data_sisaangsuran); ?></td>-->
+								<!--<td class="text-center"><?php echo $c->data_par; ?></td>-->
+								<!--<td class="text-center"><?php echo $c->data_tr; ?></td>-->
 								<!--<td class="text-center"><?php echo $c->data_date_accept; ?></td>-->
-								<td class="text-center"><?php echo $c->data_jatuhtempo; ?></td>
+								<!--<td class="text-center"><?php echo $c->data_jatuhtempo; ?></td>-->
 								<td class="text-left"><?php echo $c->sector_name; ?></td>	
 								<td class="text-center"><a href="<?php echo site_url()."/pembiayaan/akad/".$c->data_akad."/".$c->data_id; ?>" title="Download Akad" target="_blank"><?php echo $c->data_akad; ?></a></td>
 								<td class="text-center">

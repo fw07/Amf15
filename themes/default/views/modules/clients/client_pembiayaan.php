@@ -26,6 +26,7 @@
 						<li><a href="#asetrt" data-toggle="tab">Asset RT</a></li>
 						<li><a href="#pendapatan" data-toggle="tab">Pendapatan</a></li>
 						<li><a href="#pengeluaran" data-toggle="tab">Pengeluaran</a></li>
+						<li><a href="#pembiayaan" data-toggle="tab">Sumber</a></li>
 					</ul>
 				</div>
 				
@@ -722,6 +723,41 @@
 								</div>
 							</div>
 						</div>
+
+						<div class="tab-pane" id="pembiayaan">
+							<div class="form-group">
+								<label for="" class="col-sm-3 control-label">Pilih Sumber Pembiayaan</label>
+								<div class="col-sm-4">
+									<select name="client_pembiayaan_sumber" class="form-control">
+									<?php if($client->client_pembiayaan_sumber == null) { ?> 
+										<?php echo '<option value="" selected="selected">Pilih Investor</option>'; ?>
+										<?php for($i = 0; $i < count($investor); $i++) { ?>
+										<?php 
+											echo '<option value="';
+											echo $investor[$i]->lender_id.'">';
+											echo $investor[$i]->lender_name.'</option>';
+											?>
+										<?php } ?>
+									<?php } else { ?>
+										<?php for($i = 0; $i < count($investor); $i++) { ?>
+										<?php 
+											if($investor[$i]->lender_id == $client->client_pembiayaan_sumber){
+												$selected = 'selected="selected"';
+												echo '<option value="';
+												echo $investor[$i]->lender_id.'" '.$selected.'>';
+												echo $investor[$i]->lender_name.'</option>';
+											}else{
+												echo '<option value="';
+												echo $investor[$i]->lender_id.'">';
+												echo $investor[$i]->lender_name.'</option>';
+											}
+											?>	
+										<?php } ?>
+									<?php } ?>
+									</select>
+								</div>
+							</div>
+						</div>						
 					</div>
 				</div>
 				

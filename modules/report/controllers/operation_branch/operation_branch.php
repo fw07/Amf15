@@ -80,6 +80,7 @@ class Operation_branch extends Front_Controller{
 					//echo $officer_list[$n]['no_clients_awal'].'-'.$officer_list[$n]['no_majelis_awal'].'<br/>';
 					//echo $branch.'b-'.$startdate.'s-'.$enddate.'e-'.'1'.'w-'.$officer_list[$n]['officer_id'].'o';
 					//echo "<br/>";
+					
 					$total_par_per_cabang_minggu1_per_officer[$n] = $this->operation_model->count_par_per_branch_per_week_per_officer($branch, $startdate, $enddate, '1', $officer_list[$n]['officer_id']);
 					$total_par_per_cabang_minggu2_per_officer[$n] = $this->operation_model->count_par_per_branch_per_week_per_officer($branch, $startdate, $enddate, '2', $officer_list[$n]['officer_id']);
 					$total_par_per_cabang_minggu3_per_officer[$n] = $this->operation_model->count_par_per_branch_per_week_per_officer($branch, $startdate, $enddate, '3', $officer_list[$n]['officer_id']);
@@ -89,7 +90,22 @@ class Operation_branch extends Front_Controller{
 					$sum_par_per_cabang_minggu2_per_officer[$n] = $this->operation_model->sum_par_per_branch_per_week_per_officer($branch, $startdate, $enddate, '2', $officer_list[$n]['officer_id']);
 					$sum_par_per_cabang_minggu3_per_officer[$n] = $this->operation_model->sum_par_per_branch_per_week_per_officer($branch, $startdate, $enddate, '3', $officer_list[$n]['officer_id']);
 					$sum_par_per_cabang_minggu4_per_officer[$n] = $this->operation_model->sum_par_per_branch_per_week_per_officer($branch, $startdate, $enddate, '4', $officer_list[$n]['officer_id']);
+					
 				}
+
+				$log_data = array(
+
+						'activity_userid' 	    => $this->session->userdata['user_id'],
+						'activity_userbranch'   => $this->session->userdata['user_branch'],
+						'activity_module' 		=> $this->router->fetch_module(),
+						'activity_controller'   => $this->router->fetch_class(),
+						'activity_method'       => $this->router->fetch_method(),
+						'activity_data'         => 'log_data_opbranch',
+						'activity_remarks'      => 'log_remarks_opbranch'
+				);
+				
+
+				$log = $this->access_control->log_activity($log_data);
 				
 				$this->template->set('menu_title', 'Review Report')
 					 ->set('total_all_anggota_awal', $total_anggota_awal)

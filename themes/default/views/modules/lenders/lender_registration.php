@@ -8,8 +8,8 @@
 		<?php if($this->session->flashdata('message')){ ?>
 				<div class="alert alert-success"> <button type="button" class="close" data-dismiss="alert"><i class="fa fa-times"></i></button> <?php echo print_message($this->session->flashdata('message')); ?></div>
 		<?php } ?>
-		
 		<?php  	if($form_type == 'edit') $hidden = array('lid' => $lender_id, 'type' => $form_type);
+				else $hidden = array('type' => $form_type);
 				$attributes = array('id' => 'createClientForm', 'class' => 'form-horizontal', 'data-validate' => 'parsley');
           		echo form_open_multipart('lenders/save_lender', $attributes, $hidden);
         ?>
