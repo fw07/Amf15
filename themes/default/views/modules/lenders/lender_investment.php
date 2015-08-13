@@ -47,7 +47,7 @@
 							</div>
 							<div class="form-group">
 								<label for="" class="col-sm-3 control-label">Tanggal Investasi*</label>
-								<div class="col-sm-6">
+								<div class="col-sm-4">
 								  	<input type="text" name="investment_date" class="datepicker-input inp90 form-control" data-date-format="yyyy-mm-dd" value="<?php echo $one_investment->investment_date; ?>">
 								</div>
 							</div>

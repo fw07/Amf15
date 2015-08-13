@@ -18,7 +18,12 @@ class branch_model extends MY_Model {
     public function __construct()
 	{
         parent::__construct();
-    }    
+    }   
+
+    public function get_all_branch(){
+    	return $this->db->select('branch_id, branch_name')
+    				->get($this->table)->result();
+    } 
 	
 	public function get_branch($param){
 		$this->db	->join('tbl_area', 'tbl_area.area_id = tbl_branch.branch_area', 'left')

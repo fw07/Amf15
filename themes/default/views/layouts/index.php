@@ -242,6 +242,7 @@ $user_level = $this->session->userdata('user_level');
 											<ul class="nav lt">
 												<li><a href="<?php echo site_url(); ?>/setting/branch"> <i class="fa fa-angle-right"></i>  <span>Setting Branch</span></a></li>
 												<li><a href="<?php echo site_url(); ?>/setting/area"> <i class="fa fa-angle-right"></i>  <span>Setting Area</span></a></li>
+												<li><a href="<?php echo site_url(); ?>/setting/target_ops"> <i class="fa fa-angle-right"></i>  <span>Setting Target Params</span></a></li>
 												<li><a href="<?php echo site_url(); ?>/users"> <i class="fa fa-angle-right"></i>  <span>User Account</span></a></li>
 											</ul>
 										</li>

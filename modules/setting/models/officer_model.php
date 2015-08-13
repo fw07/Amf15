@@ -19,6 +19,11 @@ class officer_model extends MY_Model {
 	{
         parent::__construct();
     }    
+
+    public function get_list_officer(){
+    	return $this->db->select('officer_id, officer_name')
+    				->get($this->table)->result();
+    } 
 	
 	
 	public function get_officer($param){
